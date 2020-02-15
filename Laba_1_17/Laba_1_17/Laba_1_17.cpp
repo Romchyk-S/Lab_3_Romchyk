@@ -322,6 +322,15 @@ int main()
 			if (Keyboard::isKeyPressed(Keyboard::Key::Left)) {
 				c.move(Point(-5.f, 0.f));
 			}
+			if (Keyboard::isKeyPressed(Keyboard::Key::Right)) {
+				c.move(Point(5.f, 0.f));
+			}
+			if (Keyboard::isKeyPressed(Keyboard::Key::Up)) {
+				c.move(Point(0.f, -5.f));
+			}
+			if (Keyboard::isKeyPressed(Keyboard::Key::Down)) {
+				c.move(Point(0.f, 5.f));
+			}
 		}
 	window.clear();
 	
