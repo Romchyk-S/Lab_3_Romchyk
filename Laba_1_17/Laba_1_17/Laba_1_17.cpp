@@ -43,16 +43,16 @@ int main()
 		while (window.pollEvent(windowEvent))
 		{
 			if (windowEvent.type == Event::Closed) window.close();
-			if (Keyboard::isKeyPressed(Keyboard::Key::Left)) {
+			if (Keyboard::isKeyPressed(Keyboard::Key::Left)||Keyboard::isKeyPressed(Keyboard::Key::A)) {
 				c.move(Point(-mov, 0.f));
 			}
-			if (Keyboard::isKeyPressed(Keyboard::Key::Right)) {
+			if (Keyboard::isKeyPressed(Keyboard::Key::Right)||Keyboard::isKeyPressed(Keyboard::Key::D)) {
 				c.move(Point(mov, 0.f));
 			}
-			if (Keyboard::isKeyPressed(Keyboard::Key::Up)) {
+			if (Keyboard::isKeyPressed(Keyboard::Key::Up)||Keyboard::isKeyPressed(Keyboard::Key::W)) {
 				c.move(Point(0.f, -mov));
 			}
-			if (Keyboard::isKeyPressed(Keyboard::Key::Down)) {
+			if (Keyboard::isKeyPressed(Keyboard::Key::Down)||Keyboard::isKeyPressed(Keyboard::Key::S)) {
 				c.move(Point(0.f, mov));
 			}
 		}
