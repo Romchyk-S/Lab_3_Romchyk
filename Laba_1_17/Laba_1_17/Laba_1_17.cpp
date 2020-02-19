@@ -1,6 +1,8 @@
-#include"stdafx.h"
+#include "stdafx.h"
 #include <iostream>
-#include<Windows.h>
+#include <Windows.h>
+
+#include "Base classes.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
@@ -15,120 +17,6 @@
 using namespace sf;
 using namespace std;
 
-
-class Point
-{
-private:
-	float x;
-	float y;
-
-public:
-	Point() = default;
-
-	Point(float x1, float y1)
-	{
-		x = x1;
-		y = y1;
-	}
-
-	Point(float xy) : Point(xy, xy) {}
-
-	~Point() = default;
-
-	float getX()
-	{
-		return x;
-	}
-
-	float getY()
-	{
-		return y;
-	}
-
-	void setX(float value)
-	{
-		x = value;
-	}
-
-	void setY(float value)
-	{
-		y = value;
-	}
-};
-
-class RGBA
-{
-private:
-	float R;
-	float G;
-	float B;
-	float A;
-
-	void SetCol(float& Color, float Num_Col)
-	{
-		if (Num_Col > 255.f || Num_Col < 0.f)
-		{
-			Color = 10.f;
-		}
-		else
-		{
-			Color = Num_Col;
-		}
-	}
-
-public:
-	RGBA() = default;
-
-	RGBA(float red, float green, float blue, float alpha)
-	{
-		R = red;
-		G = green;
-		B = blue;
-		A = alpha;
-	}
-
-	float getR()
-	{
-		return R;
-	}
-
-	float getG()
-	{
-		return G;
-	}
-
-	float getB()
-	{
-		return B;
-	}
-
-	float getA()
-	{
-		return A;
-	}
-
-	void setR(float red_1)
-	{
-		SetCol(R, red_1);
-	}
-
-	void setG(float green_1)
-	{
-		SetCol(G, green_1);
-	}
-
-	void setB(float blue_1)
-	{
-		SetCol(B, blue_1);
-	}
-
-	void setA(float alpha_1)
-	{
-		SetCol(A, alpha_1);
-	}
-
-	~RGBA() = default;
- };
 
 __interface iMove 
 {
@@ -306,9 +194,13 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
+	const float center = 100.f;
+	const float radius = 5.f;
+	const float mov = 5.f;
+
 	RenderWindow window(VideoMode(1920, 1080), L"Моє вікно");
 
-	Circle c(Point(100.f, 100.f), 5.f);
+	Circle c(Point(center, center), radius);
 
 	Functions::out(&c);
 
@@ -320,16 +212,16 @@ int main()
 		{
 			if (windowEvent.type == Event::Closed) window.close();
 			if (Keyboard::isKeyPressed(Keyboard::Key::Left)) {
-				c.move(Point(-5.f, 0.f));
+				c.move(Point(-mov, 0.f));
 			}
 			if (Keyboard::isKeyPressed(Keyboard::Key::Right)) {
-				c.move(Point(5.f, 0.f));
+				c.move(Point(mov, 0.f));
 			}
 			if (Keyboard::isKeyPressed(Keyboard::Key::Up)) {
-				c.move(Point(0.f, -5.f));
+				c.move(Point(0.f, -mov));
 			}
 			if (Keyboard::isKeyPressed(Keyboard::Key::Down)) {
-				c.move(Point(0.f, 5.f));
+				c.move(Point(0.f, mov));
 			}
 		}
 	window.clear();
