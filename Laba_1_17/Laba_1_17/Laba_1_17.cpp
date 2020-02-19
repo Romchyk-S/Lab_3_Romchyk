@@ -3,6 +3,7 @@
 #include <Windows.h>
 
 #include "Base classes.h"
+#include "Interfaces.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
@@ -16,38 +17,6 @@
 
 using namespace sf;
 using namespace std;
-
-
-__interface iMove 
-{
-	void move(Point xy);
-	void movebyvalue(Point xy);
-};
-
-__interface iRotate
-{
-	void rot(float deg);
-	void rottocertain(float deg);
-	void invert();
-};
-
-__interface iColour
-{
-	void setcolour(RGBA Col);
-};
-
-__interface iScaling
-{
-	void deformx(float times);
-	void deformy(float times);
-	void doubledeform(float times);
-};
-
-__interface iDraw
-{
-	void Draw(RenderWindow& window);
-};
-
 
 
 
