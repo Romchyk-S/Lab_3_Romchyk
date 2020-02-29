@@ -65,9 +65,11 @@ int main()
 			}
 			if (Keyboard::isKeyPressed(Keyboard::Key::C)) {
 				circle = true;
+				del = false;
 			}
 			if (Keyboard::isKeyPressed(Keyboard::Key::T)) {
 				triangle = true;
+				del = false;
 			}
 			if (circle == true && (Keyboard::isKeyPressed(Keyboard::Key::Left)||Keyboard::isKeyPressed(Keyboard::Key::A))) {
 				c.move(Point(-mov, 0.f));
