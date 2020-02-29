@@ -32,7 +32,6 @@ public:
 	~Circle();
 
 	void movebyvalue(Point xy) override;
-
 	void move(Point xy) override;
 	void rottocertain(float deg) override;
 	void rot(float deg) override;
@@ -48,10 +47,42 @@ public:
 	Point getscale();
 };
 
+class Triangle : public S
+{
+private:
+	Point xy;
+	float radius;
+	float degree;
+	Point scale;
+	RGBA Col;
+
+public:
+	Triangle();
+
+	Triangle(Point p, float r);
+
+	~Triangle();
+
+	void invert();
+	Point getxy();
+	float getdeg();
+	float getrad();
+	Point getscale();
+	void move(Point xy) override;
+	void movebyvalue(Point xy) override;
+	void rottocertain(float deg) override;
+	void rot(float deg) override;
+	void deformx(float times) override;
+	void deformy(float times) override;
+	void doubledeform(float times) override;
+	void Draw(RenderWindow& window) override;
+	void setcolour(RGBA Colour) override;
+};
+
 class Functions {
 	Functions() = delete;
 	~Functions() = delete;
 
 public:
-	static void out(Circle* shape);
+	static void out(Triangle* shape);
 };

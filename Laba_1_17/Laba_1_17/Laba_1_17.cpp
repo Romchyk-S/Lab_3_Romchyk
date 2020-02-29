@@ -27,14 +27,19 @@ int main()
 	SetConsoleOutputCP(1251);
 
 	const float center = 100.f;
-	const float radius = 5.f;
-	const float mov = 5.f;
+	const float radius = 50.f;
+	float mov = 5.f;
+	bool circle = false;
+	bool triangle = false;
+	bool del = false;
 
 	RenderWindow window(VideoMode(1920, 1080), L"Моє вікно");
 
 	Circle c(Point(center, center), radius);
+	Triangle t(Point(center, center), radius);
+	
 
-	Functions::out(&c);
+	Functions::out(&t);
 
 	while (window.isOpen())
 	{
@@ -43,22 +48,65 @@ int main()
 		while (window.pollEvent(windowEvent))
 		{
 			if (windowEvent.type == Event::Closed) window.close();
-			if (Keyboard::isKeyPressed(Keyboard::Key::Left)||Keyboard::isKeyPressed(Keyboard::Key::A)) {
+			if (Keyboard::isKeyPressed(Keyboard::Key::Equal)) {
+				if (mov < 100)
+				{
+					mov += 5;
+				}
+			}
+			if (Keyboard::isKeyPressed(Keyboard::Key::Hyphen)) {
+				if (mov > 5)
+				{
+					mov -= 5;
+				}	
+			}
+			if (Keyboard::isKeyPressed(Keyboard::Key::Backspace)) {
+				del = true;
+			}
+			if (Keyboard::isKeyPressed(Keyboard::Key::C)) {
+				circle = true;
+			}
+			if (Keyboard::isKeyPressed(Keyboard::Key::T)) {
+				triangle = true;
+			}
+			if (circle == true && (Keyboard::isKeyPressed(Keyboard::Key::Left)||Keyboard::isKeyPressed(Keyboard::Key::A))) {
 				c.move(Point(-mov, 0.f));
 			}
-			if (Keyboard::isKeyPressed(Keyboard::Key::Right)||Keyboard::isKeyPressed(Keyboard::Key::D)) {
+			if (triangle == true && (Keyboard::isKeyPressed(Keyboard::Key::Left) || Keyboard::isKeyPressed(Keyboard::Key::A))) {
+				t.move(Point(-mov, 0.f));
+			}
+			if (circle == true && (Keyboard::isKeyPressed(Keyboard::Key::Right)||Keyboard::isKeyPressed(Keyboard::Key::D))) {
 				c.move(Point(mov, 0.f));
 			}
-			if (Keyboard::isKeyPressed(Keyboard::Key::Up)||Keyboard::isKeyPressed(Keyboard::Key::W)) {
+			if (triangle == true && (Keyboard::isKeyPressed(Keyboard::Key::Right) || Keyboard::isKeyPressed(Keyboard::Key::D))) {
+				t.move(Point(mov, 0.f));
+			}
+			if (circle == true && (Keyboard::isKeyPressed(Keyboard::Key::Up)||Keyboard::isKeyPressed(Keyboard::Key::W))) {
 				c.move(Point(0.f, -mov));
 			}
-			if (Keyboard::isKeyPressed(Keyboard::Key::Down)||Keyboard::isKeyPressed(Keyboard::Key::S)) {
+			if (triangle == true && (Keyboard::isKeyPressed(Keyboard::Key::Up) || Keyboard::isKeyPressed(Keyboard::Key::W))) {
+				t.move(Point(0.f, -mov));
+			}
+			if (circle == true && (Keyboard::isKeyPressed(Keyboard::Key::Down)||Keyboard::isKeyPressed(Keyboard::Key::S))) {
 				c.move(Point(0.f, mov));
+			}
+			if (triangle == true && (Keyboard::isKeyPressed(Keyboard::Key::Down) || Keyboard::isKeyPressed(Keyboard::Key::S))) {
+				t.move(Point(0.f, mov));
 			}
 		}
 	window.clear();
 	
-	c.Draw(window);
+	if (circle != false && del != true)
+	{
+		c.Draw(window);
+	}
+
+
+	if (triangle != false && del != true)
+	{
+		t.Draw(window);
+	}
+
 
 	window.display();
 	}
