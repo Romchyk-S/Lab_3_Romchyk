@@ -79,6 +79,38 @@ public:
 	void setcolour(RGBA Colour) override;
 };
 
+class Square : public S
+{
+private:
+	Point xy;
+	float radius;
+	float degree;
+	Point scale;
+	RGBA Col;
+
+public:
+	Square();
+
+	Square(Point p, float r);
+
+	~Square();
+
+	void invert();
+	Point getxy();
+	float getdeg();
+	float getrad();
+	Point getscale();
+	void move(Point xy) override;
+	void movebyvalue(Point xy) override;
+	void rottocertain(float deg) override;
+	void rot(float deg) override;
+	void deformx(float times) override;
+	void deformy(float times) override;
+	void doubledeform(float times) override;
+	void Draw(RenderWindow& window) override;
+	void setcolour(RGBA Colour) override;
+};
+
 class Functions {
 	Functions() = delete;
 	~Functions() = delete;

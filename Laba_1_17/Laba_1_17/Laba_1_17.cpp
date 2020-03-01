@@ -31,12 +31,15 @@ int main()
 	float mov = 5.f;
 	bool circle = false;
 	bool triangle = false;
+	bool square = false;
+	bool path = false;
 	bool del = false;
 
 	RenderWindow window(VideoMode(1920, 1080), L"Моє вікно");
 
 	Circle c(Point(center, center), radius);
 	Triangle t(Point(center, center), radius);
+	Square s(Point(center, center), radius);
 	
 
 	Functions::out(&t);
@@ -60,9 +63,11 @@ int main()
 					mov -= 5;
 				}	
 			}
+
 			if (Keyboard::isKeyPressed(Keyboard::Key::Backspace)) {
 				del = true;
 			}
+
 			if (Keyboard::isKeyPressed(Keyboard::Key::C)) {
 				circle = true;
 				del = false;
@@ -71,32 +76,61 @@ int main()
 				triangle = true;
 				del = false;
 			}
+			if (Keyboard::isKeyPressed(Keyboard::Key::R)) {
+				square = true;
+				del = false;
+			}
+			if (Keyboard::isKeyPressed(Keyboard::Key::P)) {
+				path = true;
+			}
+
 			if (circle == true && (Keyboard::isKeyPressed(Keyboard::Key::Left)||Keyboard::isKeyPressed(Keyboard::Key::A))) {
 				c.move(Point(-mov, 0.f));
 			}
 			if (triangle == true && (Keyboard::isKeyPressed(Keyboard::Key::Left) || Keyboard::isKeyPressed(Keyboard::Key::A))) {
 				t.move(Point(-mov, 0.f));
 			}
+			if (square == true && (Keyboard::isKeyPressed(Keyboard::Key::Left) || Keyboard::isKeyPressed(Keyboard::Key::A))) {
+				s.move(Point(-mov, 0.f));
+			}
+
 			if (circle == true && (Keyboard::isKeyPressed(Keyboard::Key::Right)||Keyboard::isKeyPressed(Keyboard::Key::D))) {
 				c.move(Point(mov, 0.f));
 			}
 			if (triangle == true && (Keyboard::isKeyPressed(Keyboard::Key::Right) || Keyboard::isKeyPressed(Keyboard::Key::D))) {
 				t.move(Point(mov, 0.f));
 			}
+			if (square == true && (Keyboard::isKeyPressed(Keyboard::Key::Right) || Keyboard::isKeyPressed(Keyboard::Key::D))) {
+				s.move(Point(mov, 0.f));
+			}
+
 			if (circle == true && (Keyboard::isKeyPressed(Keyboard::Key::Up)||Keyboard::isKeyPressed(Keyboard::Key::W))) {
 				c.move(Point(0.f, -mov));
 			}
 			if (triangle == true && (Keyboard::isKeyPressed(Keyboard::Key::Up) || Keyboard::isKeyPressed(Keyboard::Key::W))) {
 				t.move(Point(0.f, -mov));
 			}
+			if (square == true && (Keyboard::isKeyPressed(Keyboard::Key::Up) || Keyboard::isKeyPressed(Keyboard::Key::W))) {
+				s.move(Point(0.f, -mov));
+			}
+
+
 			if (circle == true && (Keyboard::isKeyPressed(Keyboard::Key::Down)||Keyboard::isKeyPressed(Keyboard::Key::S))) {
 				c.move(Point(0.f, mov));
 			}
 			if (triangle == true && (Keyboard::isKeyPressed(Keyboard::Key::Down) || Keyboard::isKeyPressed(Keyboard::Key::S))) {
 				t.move(Point(0.f, mov));
 			}
+			if (square == true && (Keyboard::isKeyPressed(Keyboard::Key::Down) || Keyboard::isKeyPressed(Keyboard::Key::S))) {
+				s.move(Point(0.f, mov));
+			}
+
 		}
-	window.clear();
+
+	if (path != true)
+	{
+		window.clear();
+	}
 	
 	if (circle != false && del != true)
 	{
@@ -109,6 +143,10 @@ int main()
 		t.Draw(window);
 	}
 
+	if (square != false && del != true)
+	{
+		s.Draw(window);
+	}
 
 	window.display();
 	}
