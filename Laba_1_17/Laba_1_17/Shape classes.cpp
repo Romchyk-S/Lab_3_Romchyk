@@ -122,9 +122,9 @@
 		radius = r;
 		degree = 0.f;
 		scale = { 1.f, 1.f };
-		Col.setR(205.f);
-		Col.setG(100.f);
-		Col.setB(200.f);
+		Col.setR(105.f);
+		Col.setG(200.f);
+		Col.setB(170.f);
 		Col.setA(200.f);
 	}
 
@@ -151,6 +151,8 @@
 		}
 
 		degree = deg;
+
+		
 	}
 
 	void Triangle::rot(float deg)
@@ -231,8 +233,8 @@
 		radius = r;
 		degree = 0.f;
 		scale = { 1.f, 1.f };
-		Col.setR(205.f);
-		Col.setG(100.f);
+		Col.setR(305.f);
+		Col.setG(200.f);
 		Col.setB(200.f);
 		Col.setA(200.f);
 	}

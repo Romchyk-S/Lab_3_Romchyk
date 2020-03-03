@@ -51,80 +51,86 @@ int main()
 		while (window.pollEvent(windowEvent))
 		{
 			if (windowEvent.type == Event::Closed) window.close();
-			if (Keyboard::isKeyPressed(Keyboard::Key::Equal)) {
-				if (mov < 100)
-				{
-					mov += 5;
+
+			if (windowEvent.type == sf::Event::KeyReleased)
+			{
+
+				if (windowEvent.key.code == sf::Keyboard::Equal) {
+					if (mov < 100)
+					{
+						mov += 5;
+					}
 				}
-			}
-			if (Keyboard::isKeyPressed(Keyboard::Key::Hyphen)) {
-				if (mov > 5)
-				{
-					mov -= 5;
-				}	
+				if (windowEvent.key.code == sf::Keyboard::Hyphen) {
+					if (mov > 5)
+					{
+						mov -= 5;
+					}
+				}
+
+				if (windowEvent.key.code == sf::Keyboard::Backspace) {
+					del = true;
+				}
+
+				if (windowEvent.key.code == sf::Keyboard::C) {
+					circle = true;
+					del = false;
+				}
+				if (windowEvent.key.code == sf::Keyboard::T) {
+					triangle = true;
+					del = false;
+				}
+				if (windowEvent.key.code == sf::Keyboard::R) {
+					square = true;
+					del = false;
+				}
+				if (windowEvent.key.code == sf::Keyboard::P) {
+					path = !path;
+				}
+
+
 			}
 
-			if (Keyboard::isKeyPressed(Keyboard::Key::Backspace)) {
-				del = true;
-			}
-
-			if (Keyboard::isKeyPressed(Keyboard::Key::C)) {
-				circle = true;
-				del = false;
-			}
-			if (Keyboard::isKeyPressed(Keyboard::Key::T)) {
-				triangle = true;
-				del = false;
-			}
-			if (Keyboard::isKeyPressed(Keyboard::Key::R)) {
-				square = true;
-				del = false;
-			}
-			if (Keyboard::isKeyPressed(Keyboard::Key::P)) {
-				path = true;
-			}
-
-			if (circle == true && (Keyboard::isKeyPressed(Keyboard::Key::Left)||Keyboard::isKeyPressed(Keyboard::Key::A))) {
+			
+			if (circle == true && windowEvent.key.code == sf::Keyboard::A) {
 				c.move(Point(-mov, 0.f));
 			}
-			if (triangle == true && (Keyboard::isKeyPressed(Keyboard::Key::Left) || Keyboard::isKeyPressed(Keyboard::Key::A))) {
+			if (triangle == true && windowEvent.key.code == sf::Keyboard::A) {
 				t.move(Point(-mov, 0.f));
 			}
-			if (square == true && (Keyboard::isKeyPressed(Keyboard::Key::Left) || Keyboard::isKeyPressed(Keyboard::Key::A))) {
+			if (square == true && windowEvent.key.code == sf::Keyboard::A) {
 				s.move(Point(-mov, 0.f));
 			}
 
-			if (circle == true && (Keyboard::isKeyPressed(Keyboard::Key::Right)||Keyboard::isKeyPressed(Keyboard::Key::D))) {
+			if (circle == true && windowEvent.key.code == sf::Keyboard::D) {
 				c.move(Point(mov, 0.f));
 			}
-			if (triangle == true && (Keyboard::isKeyPressed(Keyboard::Key::Right) || Keyboard::isKeyPressed(Keyboard::Key::D))) {
+			if (triangle == true && windowEvent.key.code == sf::Keyboard::D) {
 				t.move(Point(mov, 0.f));
 			}
-			if (square == true && (Keyboard::isKeyPressed(Keyboard::Key::Right) || Keyboard::isKeyPressed(Keyboard::Key::D))) {
+			if (square == true && windowEvent.key.code == sf::Keyboard::D) {
 				s.move(Point(mov, 0.f));
 			}
 
-			if (circle == true && (Keyboard::isKeyPressed(Keyboard::Key::Up)||Keyboard::isKeyPressed(Keyboard::Key::W))) {
+			if (circle == true && windowEvent.key.code == sf::Keyboard::W) {
 				c.move(Point(0.f, -mov));
 			}
-			if (triangle == true && (Keyboard::isKeyPressed(Keyboard::Key::Up) || Keyboard::isKeyPressed(Keyboard::Key::W))) {
+			if (triangle == true && windowEvent.key.code == sf::Keyboard::W) {
 				t.move(Point(0.f, -mov));
 			}
-			if (square == true && (Keyboard::isKeyPressed(Keyboard::Key::Up) || Keyboard::isKeyPressed(Keyboard::Key::W))) {
+			if (square == true && windowEvent.key.code == sf::Keyboard::W) {
 				s.move(Point(0.f, -mov));
 			}
 
-
-			if (circle == true && (Keyboard::isKeyPressed(Keyboard::Key::Down)||Keyboard::isKeyPressed(Keyboard::Key::S))) {
+			if (circle == true &&windowEvent.key.code == sf::Keyboard::S) {
 				c.move(Point(0.f, mov));
 			}
-			if (triangle == true && (Keyboard::isKeyPressed(Keyboard::Key::Down) || Keyboard::isKeyPressed(Keyboard::Key::S))) {
+			if (triangle == true && windowEvent.key.code == sf::Keyboard::S) {
 				t.move(Point(0.f, mov));
 			}
-			if (square == true && (Keyboard::isKeyPressed(Keyboard::Key::Down) || Keyboard::isKeyPressed(Keyboard::Key::S))) {
+			if (square == true && windowEvent.key.code == sf::Keyboard::S) {
 				s.move(Point(0.f, mov));
 			}
-
 		}
 
 	if (path != true)
