@@ -21,6 +21,43 @@
 
 	Circle::~Circle() = default;
 
+	void Circle::invert()
+	{
+		rot(180.f);
+	}
+
+	Point Circle::getxy()
+	{
+		return xy;
+	}
+
+	float Circle::getrad()
+	{
+		return radius;
+	}
+
+	float Circle::getdeg()
+	{
+		return degree;
+	}
+
+	Point Circle::getscale()
+	{
+		return scale;
+	}
+
+	bool Circle::getshow()
+	{
+		return show;
+	}
+
+	void Circle::setshow(bool show_1)
+	{
+		show = show_1;
+	}
+
+
+
 	void Circle::movebyvalue(Point xy)
 	{
 		this->xy.setX(xy.getX());
@@ -86,31 +123,57 @@
 		Col.setA(Colour.getA());
 	};
 
-
-	void Circle::invert()
+	void Circle::changecolour_red()
 	{
-		rot(180.f);
+		Col.setR(255.f);
+		Col.setG(0.f);
+		Col.setB(0.f);
+		Col.setA(200.f);
 	}
 
-	Point Circle::getxy()
+	void Circle::changecolour_yellow()
 	{
-		return xy;
+		Col.setR(255.f);
+		Col.setG(255.f);
+		Col.setB(0.f);
+		Col.setA(200.f);
 	}
 
-	float Circle::getrad()
+	void Circle::changecolour_green()
 	{
-		return radius;
+		Col.setR(0.f);
+		Col.setG(128.f);
+		Col.setB(0.f);
+		Col.setA(200.f);
 	}
 
-	float Circle::getdeg()
+	void Circle::changecolour_blue()
 	{
-		return degree;
+		Col.setR(0.f);
+		Col.setG(0.f);
+		Col.setB(255.f);
+		Col.setA(200.f);
 	}
 
-	Point Circle::getscale()
+	void Circle::changecolour_gray()
 	{
-		return scale;
+		Col.setR(128.f);
+		Col.setG(128.f);
+		Col.setB(128.f);
+		Col.setA(200.f);
 	}
+
+	void Circle::returncolor()
+	{
+		Col.setR(205.f);
+		Col.setG(100.f);
+		Col.setB(200.f);
+		Col.setA(200.f);
+	}
+
+
+
+
 
 
 	Triangle::Triangle() = default;
@@ -122,9 +185,9 @@
 		radius = r;
 		degree = 0.f;
 		scale = { 1.f, 1.f };
-		Col.setR(105.f);
-		Col.setG(200.f);
-		Col.setB(170.f);
+		Col.setR(128.f);
+		Col.setG(128.f);
+		Col.setB(0.f);
 		Col.setA(200.f);
 	}
 
@@ -197,6 +260,54 @@
 		Col.setA(Colour.getA());
 	};
 
+	void Triangle::changecolour_red()
+	{
+		Col.setR(255.f);
+		Col.setG(0.f);
+		Col.setB(0.f);
+		Col.setA(200.f);
+	}
+
+	void Triangle::changecolour_yellow()
+	{
+		Col.setR(255.f);
+		Col.setG(255.f);
+		Col.setB(0.f);
+		Col.setA(200.f);
+	}
+
+	void Triangle::changecolour_green()
+	{
+		Col.setR(0.f);
+		Col.setG(128.f);
+		Col.setB(0.f);
+		Col.setA(200.f);
+	}
+
+	void Triangle::changecolour_blue()
+	{
+		Col.setR(0.f);
+		Col.setG(0.f);
+		Col.setB(255.f);
+		Col.setA(200.f);
+	}
+
+	void Triangle::changecolour_gray()
+	{
+		Col.setR(128.f);
+		Col.setG(128.f);
+		Col.setB(128.f);
+		Col.setA(200.f);
+	}
+
+	void Triangle::returncolor()
+	{
+		Col.setR(128.f);
+		Col.setG(128.f);
+		Col.setB(0.f);
+		Col.setA(200.f);
+	}
+
 	void Triangle::invert()
 	{
 		rot(180.f);
@@ -222,6 +333,21 @@
 		return scale;
 	}
 
+	bool Triangle::getshow()
+	{
+		return show;
+	}
+
+	void Triangle::setshow(bool show_1)
+	{
+		show = show_1;
+	}
+
+
+
+
+
+
 
 
 	Square::Square() = default;
@@ -233,9 +359,9 @@
 		radius = r;
 		degree = 0.f;
 		scale = { 1.f, 1.f };
-		Col.setR(305.f);
-		Col.setG(200.f);
-		Col.setB(200.f);
+		Col.setR(255.f);
+		Col.setG(0.f);
+		Col.setB(255.f);
 		Col.setA(200.f);
 	}
 
@@ -306,6 +432,54 @@
 		Col.setA(Colour.getA());
 	};
 
+	void Square::changecolour_red()
+	{
+		Col.setR(255.f);
+		Col.setG(0.f);
+		Col.setB(0.f);
+		Col.setA(200.f);
+	}
+
+	void Square::changecolour_yellow()
+	{
+		Col.setR(255.f);
+		Col.setG(255.f);
+		Col.setB(0.f);
+		Col.setA(200.f);
+	}
+
+	void Square::changecolour_green()
+	{
+		Col.setR(0.f);
+		Col.setG(128.f);
+		Col.setB(0.f);
+		Col.setA(200.f);
+	}
+
+	void Square::changecolour_blue()
+	{
+		Col.setR(0.f);
+		Col.setG(0.f);
+		Col.setB(255.f);
+		Col.setA(200.f);
+	}
+
+	void Square::changecolour_gray()
+	{
+		Col.setR(128.f);
+		Col.setG(128.f);
+		Col.setB(128.f);
+		Col.setA(200.f);
+	}
+
+	void Square::returncolor()
+	{
+		Col.setR(255.f);
+		Col.setG(0.f);
+		Col.setB(255.f);
+		Col.setA(200.f);
+	}
+
 	void Square::invert()
 	{
 		rot(180.f);
@@ -329,6 +503,16 @@
 	Point Square::getscale()
 	{
 		return scale;
+	}
+
+	bool Square::getshow()
+	{
+		return show;
+	}
+
+	void Square::setshow(bool show_1)
+	{
+		show = show_1;
 	}
 	
 	void Functions::out(Triangle* shape) {
