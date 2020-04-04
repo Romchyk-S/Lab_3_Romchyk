@@ -129,6 +129,10 @@
 		Col.setG(0.f);
 		Col.setB(0.f);
 		Col.setA(200.f);
+		// ээээээээээм
+		// нафига так жить?
+		// а setcolour(RGBA(255.f, 0.f, 0.f, 200.f))
+		// нельзя было юзать?
 	}
 
 	void Circle::changecolour_yellow()
@@ -137,6 +141,7 @@
 		Col.setG(255.f);
 		Col.setB(0.f);
 		Col.setA(200.f);
+		// и тут
 	}
 
 	void Circle::changecolour_green()
@@ -145,6 +150,7 @@
 		Col.setG(128.f);
 		Col.setB(0.f);
 		Col.setA(200.f);
+		// и тут
 	}
 
 	void Circle::changecolour_blue()
@@ -153,6 +159,7 @@
 		Col.setG(0.f);
 		Col.setB(255.f);
 		Col.setA(200.f);
+		// фак, я уже не могу
 	}
 
 	void Circle::changecolour_gray()
@@ -161,6 +168,7 @@
 		Col.setG(128.f);
 		Col.setB(128.f);
 		Col.setA(200.f);
+		// ааааааааааааааа
 	}
 
 	void Circle::returncolor()
@@ -169,6 +177,8 @@
 		Col.setG(100.f);
 		Col.setB(200.f);
 		Col.setA(200.f);
+		// *адский полный боли крик
+		// а что если фигура изначально будет иметь не этот цвет?
 	}
 
 

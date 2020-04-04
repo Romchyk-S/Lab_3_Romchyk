@@ -3,8 +3,6 @@
 #include "Interfaces.h"
 #include "Base classes.h"
 
-#include <iostream>
-
 using namespace sf;
 using namespace std;
 
@@ -12,20 +10,21 @@ class S : public iMove, public iRotate, public iColour, public iScaling, public 
 {
 public:
 	S();
-	virtual ~S();
+	virtual ~S(); // ого, вирутальный деструктор не забыл, солидно...
 };
 
 class Circle : public S
 {
 private:
 	Point xy;
-	float radius;
-	float degree;
+	float radius{};
+	float degree{};
 	Point scale;
 	RGBA Col;
-	bool show = false;
-	bool path = false;
-
+	bool show = false; // вот так
+	bool path = false; // попрошу никогда в своей жизни не делать
+					   // инициализируем такое в конструкторе
+	// а тебе
 public:
 	Circle();
 
@@ -66,8 +65,8 @@ private:
 	float degree;
 	Point scale;
 	RGBA Col;
-	bool show = false;
-
+	bool show = false; // об этом я уже говорил
+	// не кажется
 public:
 	Triangle();
 
@@ -108,8 +107,8 @@ private:
 	float degree;
 	Point scale;
 	RGBA Col;
-	bool show = false;
-
+	bool show = false; // ну ты понял
+	// что слишком много кода повторяется?
 public:
 	Square();
 
@@ -142,10 +141,8 @@ public:
 	void returncolor();
 };
 
-class Functions {
+struct Functions { // давай попробуем лучше так, окей?
 	Functions() = delete;
 	~Functions() = delete;
-
-public:
-	static void out(Triangle* shape);
+	static void out(Triangle* shape); // почему именно триангл, а не S*? апкаст, видимо, для слабаков
 };

@@ -12,7 +12,7 @@ public:
 	Point(float x1, float y1);
 	Point(float xy);
 	~Point();
-	float getX();
+	float getX() const;
 	float getY();
 	void setX(float value);
 	void setY(float value);
@@ -21,21 +21,21 @@ public:
 class RGBA
 {
 private:
-	float R;
-	float G;
-	float B;
-	float A;
+	float R{};
+	float G{};
+	float B{};
+	float A{};
 
-	void SetCol(float& Color, float Num_Col);
+	static void SetCol(float& Color, float Num_Col);
 
 public:
 	RGBA();
 
 	RGBA(float red, float green, float blue, float alpha);
-	float getR();
-	float getG();
-	float getB();
-	float getA();
+	float getR() const;
+	float getG() const;
+	float getB() const;
+	float getA() const;
 	void setR(float red_1);
 	void setG(float green_1);
 	void setB(float blue_1);

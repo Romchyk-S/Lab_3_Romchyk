@@ -26,10 +26,10 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	const float center = 100.f;
-	const float radius = 50.f;
-	float mov = 5.f;
-	bool path = false;
+	const auto center = 100.f;
+	const auto radius = 50.f;
+	auto mov = 5.f;
+	auto path = false;
 
 	RenderWindow window(VideoMode(1920, 1080), L"ћоЇ в≥кно");
 
@@ -37,6 +37,7 @@ int main()
 	Triangle t(Point(center, center), radius);
 	Square s(Point(center, center), radius);
 	
+	// где вектор фигур?
 
 	Functions::out(&t);
 
@@ -48,15 +49,15 @@ int main()
 		{
 			if (windowEvent.type == Event::Closed) window.close();
 
-			if (windowEvent.type == sf::Event::KeyReleased)
+			if (windowEvent.type == Event::KeyReleased)
 			{
-				if (windowEvent.key.code == sf::Keyboard::Equal) {
+				if (windowEvent.key.code == Keyboard::Equal) {
 					if (mov < 100)
 					{
 						mov += 5;
 					}
 				}
-				if (windowEvent.key.code == sf::Keyboard::Hyphen) {
+				if (windowEvent.key.code == Keyboard::Hyphen) {
 					if (mov > 5)
 					{
 						mov -= 5;
@@ -64,168 +65,171 @@ int main()
 				}
 
 
-				if (windowEvent.key.code == sf::Keyboard::C) {
+				if (windowEvent.key.code == Keyboard::C) {
 					c.setshow(true);
 				}
-				if (windowEvent.key.code == sf::Keyboard::T) {
+				if (windowEvent.key.code == Keyboard::T) {
 					t.setshow(true);
 				}
-				if (windowEvent.key.code == sf::Keyboard::R) {
+				if (windowEvent.key.code == Keyboard::R) {
 					s.setshow(true);
 				}
-				if (windowEvent.key.code == sf::Keyboard::P) {
+				// за такой простой путь можно получить по *балу от будущих задач
+				// при нажатии клавиш, нужно, чтобы нужна€ фигура добавл€лась в вектор фигур
+				// а не просто по€вл€лась в единственном экземпл€ре
+				if (windowEvent.key.code == Keyboard::P) {
 					path = true;
 				}
 
 
 
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
+				if (Keyboard::isKeyPressed(Keyboard::C)) { // Ќј’*я
 
 
-					if (c.getshow() == true && windowEvent.key.code == sf::Keyboard::W) {
+					if (c.getshow()&& windowEvent.key.code == Keyboard::W) {
 						c.move(Point(0.f, -mov));
 					}
 
-					if (c.getshow() == true && windowEvent.key.code == sf::Keyboard::A) {
+					if (c.getshow() && windowEvent.key.code == Keyboard::A) {
 						c.move(Point(-mov, 0.f));
 					}
 
-					if (c.getshow() == true && windowEvent.key.code == sf::Keyboard::S) {
+					if (c.getshow() == true && windowEvent.key.code == Keyboard::S) {
 						c.move(Point(0.f, mov));
 					}
 
-					if (c.getshow() == true && windowEvent.key.code == sf::Keyboard::D) {
+					if (c.getshow() == true && windowEvent.key.code == Keyboard::D) {
 						c.move(Point(mov, 0.f));
 					}
 
 
 
-					if (windowEvent.key.code == sf::Keyboard::Num1)
+					if (windowEvent.key.code == Keyboard::Num1)
 					{
 						c.changecolour_red();
 					}
-					if (windowEvent.key.code == sf::Keyboard::Num2)
+					if (windowEvent.key.code == Keyboard::Num2)
 					{
 						c.changecolour_yellow();
 					}
-					if (windowEvent.key.code == sf::Keyboard::Num3)
+					if (windowEvent.key.code == Keyboard::Num3)
 					{
 						c.changecolour_green();
 					}
-					if (windowEvent.key.code == sf::Keyboard::Num4)
+					if (windowEvent.key.code == Keyboard::Num4)
 					{
 						c.changecolour_blue();
 					}
-					if (windowEvent.key.code == sf::Keyboard::Num5)
+					if (windowEvent.key.code == Keyboard::Num5)
 					{
 						c.changecolour_gray();
 					}
-					if (windowEvent.key.code == sf::Keyboard::Num0)
+					if (windowEvent.key.code == Keyboard::Num0)
 					{
 						c.returncolor();
 					}
 
-					if (windowEvent.key.code == sf::Keyboard::Backspace) {
+					if (windowEvent.key.code == Keyboard::Backspace) {
 						c.setshow(false);
 					}
 
 				}
 
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::T)) {
+				if (Keyboard::isKeyPressed(Keyboard::T)) { // —“ќЋ№ ќ
 
 
-					if (t.getshow() == true && windowEvent.key.code == sf::Keyboard::W) {
+					if (t.getshow() == true && windowEvent.key.code == Keyboard::W) {
 						t.move(Point(0.f, -mov));
 					}
 
-					if (t.getshow() == true && windowEvent.key.code == sf::Keyboard::A) {
+					if (t.getshow() == true && windowEvent.key.code == Keyboard::A) {
 						t.move(Point(-mov, 0.f));
 					}
 
-					if (t.getshow() == true && windowEvent.key.code == sf::Keyboard::S) {
+					if (t.getshow() == true && windowEvent.key.code == Keyboard::S) {
 						t.move(Point(0.f, mov));
 					}
 
-					if (t.getshow() == true && windowEvent.key.code == sf::Keyboard::D) {
+					if (t.getshow() == true && windowEvent.key.code == Keyboard::D) {
 						t.move(Point(mov, 0.f));
 					}
 
 
 
-					if (windowEvent.key.code == sf::Keyboard::Num1)
+					if (windowEvent.key.code == Keyboard::Num1)
 					{
 						t.changecolour_red();
 					}
-					if (windowEvent.key.code == sf::Keyboard::Num2)
+					if (windowEvent.key.code == Keyboard::Num2)
 					{
 						t.changecolour_yellow();
 					}
-					if (windowEvent.key.code == sf::Keyboard::Num3)
+					if (windowEvent.key.code == Keyboard::Num3)
 					{
 						t.changecolour_green();
 					}
-					if (windowEvent.key.code == sf::Keyboard::Num4)
+					if (windowEvent.key.code == Keyboard::Num4)
 					{
 						t.changecolour_blue();
 					}
-					if (windowEvent.key.code == sf::Keyboard::Num5)
+					if (windowEvent.key.code == Keyboard::Num5)
 					{
 						t.changecolour_gray();
 					}
-					if (windowEvent.key.code == sf::Keyboard::Num0)
+					if (windowEvent.key.code == Keyboard::Num0)
 					{
 						t.returncolor();
 					}
 
-					if (windowEvent.key.code == sf::Keyboard::Backspace) {
+					if (windowEvent.key.code == Keyboard::Backspace) {
 						t.setshow(false);
 					}
 				}
 
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+				if (Keyboard::isKeyPressed(Keyboard::R)) { // ѕќ¬“ќ–яёў≈√ќ—я
 
-					if (s.getshow() == true && windowEvent.key.code == sf::Keyboard::W) {
+					if (s.getshow() == true && windowEvent.key.code == Keyboard::W) {
 						s.move(Point(0.f, -mov));
 					}
 
-					if (s.getshow() == true && windowEvent.key.code == sf::Keyboard::A) {
+					if (s.getshow() == true && windowEvent.key.code == Keyboard::A) {
 						s.move(Point(-mov, 0.f));
 					}
 
-					if (s.getshow() == true && windowEvent.key.code == sf::Keyboard::S) {
+					if (s.getshow() == true && windowEvent.key.code == Keyboard::S) {
 						s.move(Point(0.f, mov));
 					}
 
-					if (s.getshow() == true && windowEvent.key.code == sf::Keyboard::D) {
+					if (s.getshow() == true && windowEvent.key.code == Keyboard::D) {
 						s.move(Point(mov, 0.f));
 					}
 
-					if (windowEvent.key.code == sf::Keyboard::Num1)
+					if (windowEvent.key.code == Keyboard::Num1)
 					{
 						s.changecolour_red();
 					}
-					if (windowEvent.key.code == sf::Keyboard::Num2)
+					if (windowEvent.key.code == Keyboard::Num2)
 					{
 						s.changecolour_yellow();
 					}
-					if (windowEvent.key.code == sf::Keyboard::Num3)
+					if (windowEvent.key.code == Keyboard::Num3)
 					{
 						s.changecolour_green();
 					}
-					if (windowEvent.key.code == sf::Keyboard::Num4)
+					if (windowEvent.key.code == Keyboard::Num4)
 					{
 						s.changecolour_blue();
 					}
-					if (windowEvent.key.code == sf::Keyboard::Num5)
+					if (windowEvent.key.code == Keyboard::Num5)
 					{
 						s.changecolour_gray();
 					}
-					if (windowEvent.key.code == sf::Keyboard::Num0)
+					if (windowEvent.key.code == Keyboard::Num0)
 					{
 						s.returncolor();
 					}
 
-					if (windowEvent.key.code == sf::Keyboard::Backspace) {
+					if (windowEvent.key.code == Keyboard::Backspace) {
 						s.setshow(false);
 					}
 				}					
@@ -239,7 +243,7 @@ int main()
 				}
 
 
-				if (c.getshow() == true)
+				if (c.getshow() == true) //  ќƒј!!!!!!!!!!!!!!!
 				{
 					c.Draw(window);
 				}
@@ -253,13 +257,16 @@ int main()
 				{
 					s.Draw(window);
 				}
-				
+
+				// должен быть вектор всех фигур, по которому ты проходишьс€
+				// и выполн€ешь определЄные операции, использу€ полиморфизм
+				// но как вижу, жизнь теб€ с полиморфизмом не подружила XD
 			}
 
 			window.display();
 
 		}
-}
+	}
 		
 
 

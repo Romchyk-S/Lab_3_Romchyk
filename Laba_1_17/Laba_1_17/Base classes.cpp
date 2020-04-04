@@ -9,11 +9,11 @@ Point::Point(float x1, float y1)
 	y = y1;
 }
 
-Point::Point(float xy) : Point::Point(xy, xy) {}
+Point::Point(float xy) : Point(xy, xy) {}
 
 Point::~Point() = default;
 
-float Point::getX()
+float Point::getX() const
 {
 	return x;
 }
@@ -46,54 +46,54 @@ void RGBA::SetCol(float& Color, float Num_Col)
 }
 
 
-	RGBA::RGBA() = default;
+RGBA::RGBA() = default;
 
-	RGBA::RGBA(float red, float green, float blue, float alpha)
-	{
-		R = red;
-		G = green;
-		B = blue;
-		A = alpha;
-	}
+RGBA::RGBA(float red, float green, float blue, float alpha)
+{
+	R = red;
+	G = green;
+	B = blue;
+	A = alpha;
+}
 
-	float RGBA::getR()
-	{
-		return R;
-	}
+float RGBA::getR() const
+{
+	return R;
+}
 
-	float RGBA::getG()
-	{
-		return G;
-	}
+float RGBA::getG() const
+{
+	return G;
+}
 
-	float RGBA::getB()
-	{
-		return B;
-	}
+float RGBA::getB() const
+{
+	return B;
+}
 
-	float RGBA::getA()
-	{
-		return A;
-	}
+float RGBA::getA() const
+{
+	return A;
+}
 
-	void RGBA::setR(float red_1)
-	{
-		SetCol(R, red_1);
-	}
+void RGBA::setR(float red_1)
+{
+	SetCol(R, red_1);
+}
 
-	void RGBA::setG(float green_1)
-	{
-		SetCol(G, green_1);
-	}
+void RGBA::setG(float green_1)
+{
+	SetCol(G, green_1);
+}
 
-	void RGBA::setB(float blue_1)
-	{
-		SetCol(B, blue_1);
-	}
+void RGBA::setB(float blue_1)
+{
+	SetCol(B, blue_1);
+}
 
-	void RGBA::setA(float alpha_1)
-	{
-		SetCol(A, alpha_1);
-	}
+void RGBA::setA(float alpha_1)
+{
+	SetCol(A, alpha_1);
+}
 
-	RGBA::~RGBA() = default;
+RGBA::~RGBA() = default;
