@@ -40,6 +40,6 @@ __interface iScaling
 
 __interface iDraw
 {
-	void Draw(sf::RenderWindow& window);
+	void Draw(RenderWindow& window);
 };
 

@@ -5,6 +5,66 @@
 	S::S() = default;
 	S::~S() = default;
 
+	bool S::getshow()
+	{
+		return show;
+	}
+
+	void S::setshow(bool show_1)
+	{
+		show = show_1;
+	}
+
+	Point S::getxy()
+	{
+		return xy;
+	}
+
+	float S::getrad()
+	{
+		return radius;
+	}
+
+	float S::getdeg()
+	{
+		return degree;
+	}
+
+	Point S::getscale()
+	{
+		return scale;
+	}
+
+	void S::changecolour_red()
+	{
+		setcolour(RGBA(255.f, 0.f, 0.f, 200.f));
+	}
+
+	void S::changecolour_yellow()
+	{
+		setcolour(RGBA(255.f, 255.f, 0.f, 200.f));
+	}
+
+	void S::changecolour_green()
+	{
+		setcolour(RGBA(0.f, 128.f, 0.f, 200.f));
+	}
+
+	void S::changecolour_blue()
+	{
+		setcolour(RGBA(0.f, 0.f, 255.f, 200.f));
+	}
+
+	void S::changecolour_gray()
+	{
+		setcolour(RGBA(128.f, 128.f, 128.f, 200.f));
+	}
+
+
+
+
+
+
 	Circle::Circle() = default;
 
 	Circle::Circle(Point p, float r)
@@ -26,37 +86,18 @@
 		rot(180.f);
 	}
 
-	Point Circle::getxy()
+	void Circle::Draw(RenderWindow& window)
 	{
-		return xy;
+		CircleShape circ(radius);
+
+		circ.setPosition(xy.getX(), xy.getY());
+		circ.setScale(scale.getX(), scale.getY());
+		circ.setRotation(degree);
+		circ.setFillColor(Color(Col.getR(), Col.getG(), Col.getB(), Col.getA()));
+		circ.setOutlineColor(Color(Col.getR(), Col.getG(), Col.getB(), Col.getA()));
+
+		window.draw(circ);
 	}
-
-	float Circle::getrad()
-	{
-		return radius;
-	}
-
-	float Circle::getdeg()
-	{
-		return degree;
-	}
-
-	Point Circle::getscale()
-	{
-		return scale;
-	}
-
-	bool Circle::getshow()
-	{
-		return show;
-	}
-
-	void Circle::setshow(bool show_1)
-	{
-		show = show_1;
-	}
-
-
 
 	void Circle::movebyvalue(Point xy)
 	{
@@ -102,19 +143,6 @@
 		deformy(times);
 	}
 
-	void Circle::Draw(RenderWindow& window)
-	{
-		CircleShape circ(radius);
-		
-		circ.setPosition(xy.getX(), xy.getY());
-		circ.setScale(scale.getX(), scale.getY());
-		circ.setRotation(degree);
-		circ.setFillColor(Color(Col.getR(), Col.getG(), Col.getB(), Col.getA()));
-		circ.setOutlineColor(Color(Col.getR(), Col.getG(), Col.getB(), Col.getA()));
-
-		window.draw(circ);
-	}
-
 	void Circle::setcolour(RGBA Colour)
 	{
 		Col.setR(Colour.getR());
@@ -122,54 +150,6 @@
 		Col.setB(Colour.getB());
 		Col.setA(Colour.getA());
 	};
-
-	void Circle::changecolour_red()
-	{
-		Col.setR(255.f);
-		Col.setG(0.f);
-		Col.setB(0.f);
-		Col.setA(200.f);
-		// ээээээээээм
-		// нафига так жить?
-		// а setcolour(RGBA(255.f, 0.f, 0.f, 200.f))
-		// нельзя было юзать?
-	}
-
-	void Circle::changecolour_yellow()
-	{
-		Col.setR(255.f);
-		Col.setG(255.f);
-		Col.setB(0.f);
-		Col.setA(200.f);
-		// и тут
-	}
-
-	void Circle::changecolour_green()
-	{
-		Col.setR(0.f);
-		Col.setG(128.f);
-		Col.setB(0.f);
-		Col.setA(200.f);
-		// и тут
-	}
-
-	void Circle::changecolour_blue()
-	{
-		Col.setR(0.f);
-		Col.setG(0.f);
-		Col.setB(255.f);
-		Col.setA(200.f);
-		// фак, я уже не могу
-	}
-
-	void Circle::changecolour_gray()
-	{
-		Col.setR(128.f);
-		Col.setG(128.f);
-		Col.setB(128.f);
-		Col.setA(200.f);
-		// ааааааааааааааа
-	}
 
 	void Circle::returncolor()
 	{
@@ -249,19 +229,6 @@
 		deformy(times);
 	}
 
-	void Triangle::Draw(RenderWindow& window)
-	{
-		CircleShape triang(radius, 3);
-
-		triang.setPosition(xy.getX(), xy.getY());
-		triang.setScale(scale.getX(), scale.getY());
-		triang.setRotation(degree);
-		triang.setFillColor(Color(Col.getR(), Col.getG(), Col.getB(), Col.getA()));
-		triang.setOutlineColor(Color(Col.getR(), Col.getG(), Col.getB(), Col.getA()));
-
-		window.draw(triang);
-	}
-
 	void Triangle::setcolour(RGBA Colour)
 	{
 		Col.setR(Colour.getR());
@@ -269,46 +236,6 @@
 		Col.setB(Colour.getB());
 		Col.setA(Colour.getA());
 	};
-
-	void Triangle::changecolour_red()
-	{
-		Col.setR(255.f);
-		Col.setG(0.f);
-		Col.setB(0.f);
-		Col.setA(200.f);
-	}
-
-	void Triangle::changecolour_yellow()
-	{
-		Col.setR(255.f);
-		Col.setG(255.f);
-		Col.setB(0.f);
-		Col.setA(200.f);
-	}
-
-	void Triangle::changecolour_green()
-	{
-		Col.setR(0.f);
-		Col.setG(128.f);
-		Col.setB(0.f);
-		Col.setA(200.f);
-	}
-
-	void Triangle::changecolour_blue()
-	{
-		Col.setR(0.f);
-		Col.setG(0.f);
-		Col.setB(255.f);
-		Col.setA(200.f);
-	}
-
-	void Triangle::changecolour_gray()
-	{
-		Col.setR(128.f);
-		Col.setG(128.f);
-		Col.setB(128.f);
-		Col.setA(200.f);
-	}
 
 	void Triangle::returncolor()
 	{
@@ -323,35 +250,6 @@
 		rot(180.f);
 	}
 
-	Point Triangle::getxy()
-	{
-		return xy;
-	}
-
-	float Triangle::getrad()
-	{
-		return radius;
-	}
-
-	float Triangle::getdeg()
-	{
-		return degree;
-	}
-
-	Point Triangle::getscale()
-	{
-		return scale;
-	}
-
-	bool Triangle::getshow()
-	{
-		return show;
-	}
-
-	void Triangle::setshow(bool show_1)
-	{
-		show = show_1;
-	}
 
 
 
@@ -442,46 +340,6 @@
 		Col.setA(Colour.getA());
 	};
 
-	void Square::changecolour_red()
-	{
-		Col.setR(255.f);
-		Col.setG(0.f);
-		Col.setB(0.f);
-		Col.setA(200.f);
-	}
-
-	void Square::changecolour_yellow()
-	{
-		Col.setR(255.f);
-		Col.setG(255.f);
-		Col.setB(0.f);
-		Col.setA(200.f);
-	}
-
-	void Square::changecolour_green()
-	{
-		Col.setR(0.f);
-		Col.setG(128.f);
-		Col.setB(0.f);
-		Col.setA(200.f);
-	}
-
-	void Square::changecolour_blue()
-	{
-		Col.setR(0.f);
-		Col.setG(0.f);
-		Col.setB(255.f);
-		Col.setA(200.f);
-	}
-
-	void Square::changecolour_gray()
-	{
-		Col.setR(128.f);
-		Col.setG(128.f);
-		Col.setB(128.f);
-		Col.setA(200.f);
-	}
-
 	void Square::returncolor()
 	{
 		Col.setR(255.f);
@@ -494,41 +352,3 @@
 	{
 		rot(180.f);
 	}
-
-	Point Square::getxy()
-	{
-		return xy;
-	}
-
-	float Square::getrad()
-	{
-		return radius;
-	}
-
-	float Square::getdeg()
-	{
-		return degree;
-	}
-
-	Point Square::getscale()
-	{
-		return scale;
-	}
-
-	bool Square::getshow()
-	{
-		return show;
-	}
-
-	void Square::setshow(bool show_1)
-	{
-		show = show_1;
-	}
-	
-	void Functions::out(Triangle* shape) {
-		cout << "Центр: (" << shape->getxy().getX() << ";" << shape->getxy().getY() << ")" << endl;
-		cout << "Радіус: " << shape->getrad() << endl;
-		cout << "Градуси: " << shape->getdeg() << endl;
-		cout << "Деформація x: " << shape->getscale().getX() << endl;
-		cout << "Деформація y: " << shape->getscale().getY() << endl;
-};
