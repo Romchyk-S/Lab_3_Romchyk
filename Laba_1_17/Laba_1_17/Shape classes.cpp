@@ -229,6 +229,19 @@
 		deformy(times);
 	}
 
+	void Triangle::Draw(RenderWindow& window)
+	{
+		CircleShape triang(radius, 3);
+
+		triang.setPosition(xy.getX(), xy.getY());
+		triang.setScale(scale.getX(), scale.getY());
+		triang.setRotation(degree);
+		triang.setFillColor(Color(Col.getR(), Col.getG(), Col.getB(), Col.getA()));
+		triang.setOutlineColor(Color(Col.getR(), Col.getG(), Col.getB(), Col.getA()));
+
+		window.draw(triang);
+	}
+
 	void Triangle::setcolour(RGBA Colour)
 	{
 		Col.setR(Colour.getR());
