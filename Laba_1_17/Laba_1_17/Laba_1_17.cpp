@@ -19,78 +19,6 @@
 using namespace sf;
 using namespace std;
 
-const auto center = 100.f;
-const auto radius = 50.f;
-auto mov = 5.f;
-auto path = false;
-
-RenderWindow window(VideoMode(1920, 1080), L"Моє вікно");
-
-
-void keypressedfunc(S *fig, Event &windowEvent)
-{
-	if (fig->getshow() && windowEvent.key.code == Keyboard::W) {
-		fig->move(Point(0.f, -mov));
-	}
-
-	if (fig->getshow() && windowEvent.key.code == Keyboard::A) {
-		fig->move(Point(-mov, 0.f));
-	}
-
-	if (fig->getshow() == true && windowEvent.key.code == Keyboard::S) {
-		fig->move(Point(0.f, mov));
-	}
-
-	if (fig->getshow() == true && windowEvent.key.code == Keyboard::D) {
-		fig->move(Point(mov, 0.f));
-	}
-
-
-
-	if (windowEvent.key.code == Keyboard::Num1)
-	{
-		fig->changecolour_red();
-	}
-	if (windowEvent.key.code == Keyboard::Num2)
-	{
-		fig->changecolour_yellow();
-	}
-	if (windowEvent.key.code == Keyboard::Num3)
-	{
-		fig->changecolour_green();
-	}
-	if (windowEvent.key.code == Keyboard::Num4)
-	{
-		fig->changecolour_blue();
-	}
-	if (windowEvent.key.code == Keyboard::Num5)
-	{
-		fig->changecolour_gray();
-	}
-
-	if (windowEvent.key.code == Keyboard::Backspace) {
-		fig->setshow(false);
-	}
-}
-
-void drawing(S*fig, Event &windowEvent)
-{
-	if (fig->getshow() == true)
-	{
-		fig->Draw(window);
-
-		cout << "FUCK" << endl;
-	}
-}
-
-
-void Functions::out(S* fig) {
-	cout << "Центр: (" << fig->getxy().getX() << ";" << fig->getxy().getY() << ")" << endl;
-	cout << "Радіус: " << fig->getrad() << endl;
-	cout << "Градуси: " << fig->getdeg() << endl;
-	cout << "Деформація x: " << fig->getscale().getX() << endl;
-	cout << "Деформація y: " << fig->getscale().getY() << endl;
-};
 
 
 int main()
@@ -98,7 +26,12 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	
+	const auto center = 100.f;
+	const auto radius = 50.f;
+	auto mov = 5.f;
+	auto path = false;
+
+	RenderWindow window(VideoMode(1920, 1080), L"Моє вікно");
 
 	Circle c(Point(center, center), radius);
 	Triangle t(Point(center, center), radius);
@@ -134,10 +67,6 @@ int main()
 
 				if (windowEvent.key.code == Keyboard::C) {
 					c.setshow(true);
-
-					drawing(&c, windowEvent);
-
-					cout << "FUCK AGAIN" << endl;
 				}
 				if (windowEvent.key.code == Keyboard::T) {
 					t.setshow(true);
@@ -148,56 +77,164 @@ int main()
 				// за такой простой путь можно получить по *балу от будущих задач
 				// при нажатии клавиш, нужно, чтобы нужная фигура добавлялась в вектор фигур
 				// а не просто появлялась в единственном экземпляре
-
 				if (windowEvent.key.code == Keyboard::P) {
 					path = true;
 				}
 
 
 
-				if (windowEvent.key.code == Keyboard::C) {
-
-					
-
-					keypressedfunc(&c, windowEvent);
+				if (Keyboard::isKeyPressed(Keyboard::C)) { // НАХ*Я
 
 
+					if (c.getshow()&& windowEvent.key.code == Keyboard::W) {
+						c.move(Point(0.f, -mov));
+					}
+
+					if (c.getshow() && windowEvent.key.code == Keyboard::A) {
+						c.move(Point(-mov, 0.f));
+					}
+
+					if (c.getshow() == true && windowEvent.key.code == Keyboard::S) {
+						c.move(Point(0.f, mov));
+					}
+
+					if (c.getshow() == true && windowEvent.key.code == Keyboard::D) {
+						c.move(Point(mov, 0.f));
+					}
+
+
+
+					if (windowEvent.key.code == Keyboard::Num1)
+					{
+						c.changecolour_red();
+					}
+					if (windowEvent.key.code == Keyboard::Num2)
+					{
+						c.changecolour_yellow();
+					}
+					if (windowEvent.key.code == Keyboard::Num3)
+					{
+						c.changecolour_green();
+					}
+					if (windowEvent.key.code == Keyboard::Num4)
+					{
+						c.changecolour_blue();
+					}
+					if (windowEvent.key.code == Keyboard::Num5)
+					{
+						c.changecolour_gray();
+					}
 					if (windowEvent.key.code == Keyboard::Num0)
 					{
 						c.returncolor();
 					}
 
+					if (windowEvent.key.code == Keyboard::Backspace) {
+						c.setshow(false);
+					}
+
 				}
 
-				if (Keyboard::isKeyPressed(Keyboard::T)) {
+				if (Keyboard::isKeyPressed(Keyboard::T)) { // СТОЛЬКО
 
-					drawing(&t, windowEvent);
 
-					keypressedfunc(&t, windowEvent);
+					if (t.getshow() == true && windowEvent.key.code == Keyboard::W) {
+						t.move(Point(0.f, -mov));
+					}
 
+					if (t.getshow() == true && windowEvent.key.code == Keyboard::A) {
+						t.move(Point(-mov, 0.f));
+					}
+
+					if (t.getshow() == true && windowEvent.key.code == Keyboard::S) {
+						t.move(Point(0.f, mov));
+					}
+
+					if (t.getshow() == true && windowEvent.key.code == Keyboard::D) {
+						t.move(Point(mov, 0.f));
+					}
+
+
+
+					if (windowEvent.key.code == Keyboard::Num1)
+					{
+						t.changecolour_red();
+					}
+					if (windowEvent.key.code == Keyboard::Num2)
+					{
+						t.changecolour_yellow();
+					}
+					if (windowEvent.key.code == Keyboard::Num3)
+					{
+						t.changecolour_green();
+					}
+					if (windowEvent.key.code == Keyboard::Num4)
+					{
+						t.changecolour_blue();
+					}
+					if (windowEvent.key.code == Keyboard::Num5)
+					{
+						t.changecolour_gray();
+					}
 					if (windowEvent.key.code == Keyboard::Num0)
 					{
 						t.returncolor();
 					}
+
+					if (windowEvent.key.code == Keyboard::Backspace) {
+						t.setshow(false);
+					}
 				}
 
-				if (Keyboard::isKeyPressed(Keyboard::R)) {
+				if (Keyboard::isKeyPressed(Keyboard::R)) { // ПОВТОРЯЮЩЕГОСЯ
 
-					drawing(&s, windowEvent);
+					if (s.getshow() == true && windowEvent.key.code == Keyboard::W) {
+						s.move(Point(0.f, -mov));
+					}
 
-					keypressedfunc(&s, windowEvent);
+					if (s.getshow() == true && windowEvent.key.code == Keyboard::A) {
+						s.move(Point(-mov, 0.f));
+					}
 
+					if (s.getshow() == true && windowEvent.key.code == Keyboard::S) {
+						s.move(Point(0.f, mov));
+					}
 
+					if (s.getshow() == true && windowEvent.key.code == Keyboard::D) {
+						s.move(Point(mov, 0.f));
+					}
+
+					if (windowEvent.key.code == Keyboard::Num1)
+					{
+						s.changecolour_red();
+					}
+					if (windowEvent.key.code == Keyboard::Num2)
+					{
+						s.changecolour_yellow();
+					}
+					if (windowEvent.key.code == Keyboard::Num3)
+					{
+						s.changecolour_green();
+					}
+					if (windowEvent.key.code == Keyboard::Num4)
+					{
+						s.changecolour_blue();
+					}
+					if (windowEvent.key.code == Keyboard::Num5)
+					{
+						s.changecolour_gray();
+					}
 					if (windowEvent.key.code == Keyboard::Num0)
 					{
 						s.returncolor();
 					}
 
+					if (windowEvent.key.code == Keyboard::Backspace) {
+						s.setshow(false);
+					}
 				}					
 				
-				
-				
-				
+
 
 
 				if (path == false)
@@ -205,6 +242,21 @@ int main()
 					window.clear();
 				}
 
+
+				if (c.getshow() == true) // КОДА!!!!!!!!!!!!!!!
+				{
+					c.Draw(window);
+				}
+
+				if (t.getshow() == true)
+				{
+					t.Draw(window);
+				}
+
+				if (s.getshow() == true)
+				{
+					s.Draw(window);
+				}
 
 				// должен быть вектор всех фигур, по которому ты проходишься
 				// и выполняешь определёные операции, используя полиморфизм
@@ -215,6 +267,9 @@ int main()
 
 		}
 	}
+		
+
+
 			
 	system("pause > NUL");
 	return 0;
