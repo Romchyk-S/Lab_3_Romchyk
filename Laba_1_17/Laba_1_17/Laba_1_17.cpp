@@ -22,10 +22,14 @@ using namespace std;
 const auto center = 100.f;
 const auto radius = 50.f;
 auto mov = 20.f;
+auto deformerx = 2.f;
+auto deformery = 2.f;
+auto ddeformer = 2.f;
+auto rotatorpos = 15.f;
+auto rotatorneg = -15.f;
 auto path = false;
 
 RenderWindow window(VideoMode(1920, 1080), L"Моє вікно");
-
 
 void keypressedfunc(S *fig, Event &windowEvent)
 {
@@ -52,26 +56,72 @@ void keypressedfunc(S *fig, Event &windowEvent)
 	if (windowEvent.key.code == Keyboard::Num1)
 	{
 		fig->changecolour_red();
+		fig->setcurrentcolour(fig->getcolour());
 	}
 	if (windowEvent.key.code == Keyboard::Num2)
 	{
 		fig->changecolour_yellow();
+		fig->setcurrentcolour(fig->getcolour());
 	}
 	if (windowEvent.key.code == Keyboard::Num3)
 	{
 		fig->changecolour_green();
+		fig->setcurrentcolour(fig->getcolour());
 	}
 	if (windowEvent.key.code == Keyboard::Num4)
 	{
 		fig->changecolour_blue();
+		fig->setcurrentcolour(fig->getcolour());
 	}
 	if (windowEvent.key.code == Keyboard::Num5)
 	{
 		fig->changecolour_gray();
+		fig->setcurrentcolour(fig->getcolour());
+	}
+	if (windowEvent.key.code == Keyboard::Num0)
+	{
+		fig->returncolor();
+	}
+
+	if (windowEvent.key.code == Keyboard::B)
+	{
+		fig->returncolor();
+		fig->returnpoint();
+		fig->returnscale();
+		fig->returndeg();
+
+		fig->setcurrentcolour(fig->getcolour());
 	}
 
 	if (windowEvent.key.code == Keyboard::Backspace) {
 		fig->setshow(false);
+	}
+
+	if (windowEvent.key.code == Keyboard::X) {
+		fig->deformx(deformerx);
+		deformerx++;
+	}
+
+	if (windowEvent.key.code == Keyboard::Y) {
+		fig->deformy(deformery);
+		deformery++;
+	}
+
+	if (windowEvent.key.code == Keyboard::Z) {
+		fig->doubledeform(ddeformer);
+		ddeformer++;
+		deformerx++;
+		deformery++;
+	}
+
+	if (windowEvent.key.code == Keyboard::Right) {
+		fig->setdeg(rotatorpos);
+		rotatorpos += 15;
+	}
+
+	if (windowEvent.key.code == Keyboard::Left) {
+		fig->setdeg(rotatorneg);
+		rotatorneg -= 15;
 	}
 }
 
@@ -103,8 +153,30 @@ int main()
 	Circle c(Point(center, center), radius);
 	Triangle t(Point(center, center), radius);
 	Square s(Point(center, center), radius);
+
+	c.setstartcolour(c.getcolour());
+	t.setstartcolour(c.getcolour());
+	s.setstartcolour(c.getcolour());
+
+	c.setstartpoint(c.getxy());
+	t.setstartpoint(c.getxy());
+	s.setstartpoint(c.getxy());
+
+	c.setstartscale(c.getscale());
+	t.setstartscale(t.getscale());
+	s.setstartscale(s.getscale());
+
+	c.setstartdeg(c.getdeg());
+	t.setstartdeg(t.getdeg());
+	s.setstartdeg(s.getdeg());
+
+	c.setcurrentcolour(c.getcolour());
+	t.setcurrentcolour(c.getcolour());
+	s.setcurrentcolour(c.getcolour());
+
 	
 	// где вектор фигур?
+
 
 	Functions::out(&t);
 
@@ -131,16 +203,37 @@ int main()
 					}
 				}
 
+				if (Keyboard::isKeyPressed(Keyboard::Q)) {
+						
+					if (windowEvent.key.code == Keyboard::C) {
+						c.setshow(true);
 
-				if (windowEvent.key.code == Keyboard::C) {
-					c.setshow(true);
+						//if (c.getcolour() != RGBA(0.f, 0.f, 0.f, 200.f))
+						//{
+							
+						//}
+
+						c.setcolour(c.getcurrentcolour());
+						
+
+					}
+					if (windowEvent.key.code == Keyboard::T) {
+						t.setshow(true);
+
+
+						t.setcolour(t.getcurrentcolour());
+	
+					}
+					if (windowEvent.key.code == Keyboard::R) {
+						s.setshow(true);
+					
+						s.setcolour(s.getcurrentcolour());
+						
+					}
+
 				}
-				if (windowEvent.key.code == Keyboard::T) {
-					t.setshow(true);
-				}
-				if (windowEvent.key.code == Keyboard::R) {
-					s.setshow(true);
-				}
+			
+				
 				// за такой простой путь можно получить по *балу от будущих задач
 				// при нажатии клавиш, нужно, чтобы нужная фигура добавлялась в вектор фигур
 				// а не просто появлялась в единственном экземпляре
@@ -153,21 +246,11 @@ int main()
 
 					keypressedfunc(&c, windowEvent);
 
-					if (windowEvent.key.code == Keyboard::Num0)
-					{
-						c.returncolor();
-					}
-
 				}
 
 				if (Keyboard::isKeyPressed(Keyboard::T)) { 
 
 					keypressedfunc(&t, windowEvent);
-
-					if (windowEvent.key.code == Keyboard::Num0)
-					{
-						t.returncolor();
-					}
 
 				}
 
@@ -175,10 +258,6 @@ int main()
 
 					keypressedfunc(&s, windowEvent);
 
-					if (windowEvent.key.code == Keyboard::Num0)
-					{
-						s.returncolor();
-					}
 				}					
 				
 
@@ -205,6 +284,6 @@ int main()
 		}
 	}
 				
-	system("pause > NUL");
+	//system("pause > NUL");
 	return 0;
 }

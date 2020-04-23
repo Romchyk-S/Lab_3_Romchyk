@@ -11,9 +11,20 @@
 		return show;
 	}
 
+	void S::hide()
+	{
+		setcolour(RGBA(0.f, 0.f, 0.f, 200.f));
+	}
+
+
 	void S::setshow(bool show_1)
 	{
 		show = show_1;
+
+		if (show == false)
+		{
+			hide();
+		}
 	}
 
 	void S::changecolour_red()
@@ -46,6 +57,26 @@
 		return xy;
 	}
 
+	void S::setxy(Point x1y1)
+	{
+		xy = x1y1;
+	}
+
+	void S::setstartpoint(Point x1y1)
+	{
+		startpoint = x1y1;
+	};
+
+	Point S::getstartpoint()
+	{
+		return startpoint;
+	};
+
+	void S::returnpoint()
+	{
+		setxy(getstartpoint());
+	};
+
 	float S::getrad()
 	{
 		return radius;
@@ -56,10 +87,50 @@
 		return degree;
 	}
 
+	void S::setdeg(float deg)
+	{
+		degree = deg;
+	}
+
+	void S::setstartdeg(float degree)
+	{
+		startdegree = degree;
+	};
+
+	float S::getstartdeg()
+	{
+		return startdegree;
+	};
+
+	void S::returndeg()
+	{
+		setdeg(getstartdeg());
+	};
+
 	Point S::getscale()
 	{
 		return scale;
 	}
+
+	void S::setscale(Point x2y2)
+	{
+		scale = x2y2;
+	}
+
+	void S::setstartscale(Point x2y2)
+	{
+		startscale = x2y2;
+	};
+
+	Point S::getstartscale()
+	{
+		return startscale;
+	};
+
+	void S::returnscale()
+	{
+		setscale(getstartscale());
+	};
 
 	bool S::getpath()
 	{
@@ -71,7 +142,46 @@
 		path = path_1;
 	}
 
+	void S::setcolour(RGBA Colour)
+	{
+		Col.setR(Colour.getR());
+		Col.setG(Colour.getG());
+		Col.setB(Colour.getB());
+		Col.setA(Colour.getA());
+	};
 
+	RGBA S::getcolour()
+	{
+		return Col;
+	};
+
+	void S::returncolor()
+	{
+		setcolour(Startcol);
+	};
+
+	void S::setstartcolour(RGBA Colour)
+	{
+		Startcol.setR(Colour.getR());
+		Startcol.setG(Colour.getG());
+		Startcol.setB(Colour.getB());
+		Startcol.setA(Colour.getA());
+	};
+
+	RGBA S::getstartcolour()
+	{
+		return Startcol;
+	};
+
+	RGBA S::getcurrentcolour()
+	{
+		return Current_colour;
+	};
+
+	void S::setcurrentcolour(RGBA Colour)
+	{
+		Current_colour = Colour;
+	};
 
 
 
@@ -92,55 +202,35 @@
 
 	Circle::~Circle() = default;
 
-	void Circle::invert()
-	{
-		rot(180.f);
-	}
-
 
 	void Circle::movebyvalue(Point xy)
 	{
 		this->xy.setX(xy.getX());
 		this->xy.setY(xy.getY());
-	}
+	};
 
 	void Circle::move(Point xy){
 		if (xy.getX() + this->xy.getX() < 1920 && xy.getX() + this->xy.getX() > 0 && xy.getY() + this->xy.getY() < 1080 && xy.getY() + this->xy.getY() > 0)
 		{
 			movebyvalue(Point(xy.getX() + this->xy.getX(), xy.getY() + this->xy.getY()));
 		}
-	}
-
-	void Circle::rottocertain(float deg)
-	{
-		while (deg >= 360)
-		{
-			deg -= 360;
-		}
-
-		degree = deg;
-	}
-
-	void Circle::rot(float deg)
-	{
-		rottocertain(degree + deg);
-	}
+	};
 
 	void Circle::deformx(float times)
 	{
 		scale.setX(times);
-	}
+	};
 
 	void Circle::deformy(float times)
 	{
 		scale.setY(times);
-	}
+	};
 
 	void Circle::doubledeform(float times)
 	{
 		deformx(times);
 		deformy(times);
-	}
+	};
 
 	void Circle::Draw(RenderWindow& window)
 	{
@@ -150,29 +240,11 @@
 		circ.setScale(scale.getX(), scale.getY());
 		circ.setRotation(degree);
 		circ.setFillColor(Color(Col.getR(), Col.getG(), Col.getB(), Col.getA()));
+		circ.getFillColor();
 		circ.setOutlineColor(Color(Col.getR(), Col.getG(), Col.getB(), Col.getA()));
 
 		window.draw(circ);
-	}
-
-	void Circle::setcolour(RGBA Colour)
-	{
-		Col.setR(Colour.getR());
-		Col.setG(Colour.getG());
-		Col.setB(Colour.getB());
-		Col.setA(Colour.getA());
 	};
-	
-
-	void Circle::returncolor()
-	{
-		Col.setR(205.f);
-		Col.setG(100.f);
-		Col.setB(200.f);
-		Col.setA(200.f);
-		// *адский полный боли крик
-		// а что если фигура изначально будет иметь не этот цвет?
-	}
 
 
 
@@ -209,23 +281,6 @@
 		}	
 	}
 
-	void Triangle::rottocertain(float deg)
-	{
-		while (deg >= 360)
-		{
-			deg -= 360;
-		}
-
-		degree = deg;
-
-		
-	}
-
-	void Triangle::rot(float deg)
-	{
-		rottocertain(degree + deg);
-	}
-
 	void Triangle::deformx(float times)
 	{
 		scale.setX(times);
@@ -254,28 +309,6 @@
 
 		window.draw(triang);
 	}
-
-	void Triangle::setcolour(RGBA Colour)
-	{
-		Col.setR(Colour.getR());
-		Col.setG(Colour.getG());
-		Col.setB(Colour.getB());
-		Col.setA(Colour.getA());
-	};
-
-	void Triangle::returncolor()
-	{
-		Col.setR(128.f);
-		Col.setG(128.f);
-		Col.setB(0.f);
-		Col.setA(200.f);
-	}
-
-	void Triangle::invert()
-	{
-		rot(180.f);
-	}
-
 
 
 
@@ -313,21 +346,6 @@
 		}
 	}
 
-	void Square::rottocertain(float deg)
-	{
-		while (deg >= 360)
-		{
-			deg -= 360;
-		}
-
-		degree = deg;
-	}
-
-	void Square::rot(float deg)
-	{
-		rottocertain(degree + deg);
-	}
-
 	void Square::deformx(float times)
 	{
 		scale.setX(times);
@@ -350,30 +368,9 @@
 
 		triang.setPosition(xy.getX(), xy.getY());
 		triang.setScale(scale.getX(), scale.getY());
-		triang.setRotation(degree);
+		triang.rotate(degree);
 		triang.setFillColor(Color(Col.getR(), Col.getG(), Col.getB(), Col.getA()));
 		triang.setOutlineColor(Color(Col.getR(), Col.getG(), Col.getB(), Col.getA()));
 
 		window.draw(triang);
-	}
-
-	void Square::setcolour(RGBA Colour)
-	{
-		Col.setR(Colour.getR());
-		Col.setG(Colour.getG());
-		Col.setB(Colour.getB());
-		Col.setA(Colour.getA());
-	};
-
-	void Square::returncolor()
-	{
-		Col.setR(255.f);
-		Col.setG(0.f);
-		Col.setB(255.f);
-		Col.setA(200.f);
-	}
-
-	void Square::invert()
-	{
-		rot(180.f);
 	}

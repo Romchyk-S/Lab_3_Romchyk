@@ -6,23 +6,32 @@
 using namespace sf;
 using namespace std;
 
-class S : public iMove, public iRotate, public iColour, public iScaling, public iDraw
+class S : public iMove, public iColour, public iScaling, public iDraw
 {
 public:
 	S();
 	virtual ~S(); 
 
-	bool show;
+	
 	Point xy;
 	float radius{};
 	float degree{};
 	Point scale;
 	bool path;
+	RGBA Col;
+	RGBA Startcol;
+	RGBA Current_colour;
+	bool show;
+	Point startpoint;
+	Point startscale;
+	float startdegree;
 
 	Point getxy();
+	void setxy(Point x1y1);
 	float getrad();
 	float getdeg();
 	Point getscale();
+	void setscale(Point x2y2);
 	bool getshow();
 	void setshow(bool show_1);
 	void changecolour_red();
@@ -30,14 +39,32 @@ public:
 	void changecolour_green();
 	void changecolour_blue();
 	void changecolour_gray();
+	void hide();
 	bool getpath();
 	void setpath(bool path_1);
+	void setcolour(RGBA Colour) override;
+	void setstartcolour(RGBA Colour);
+	void returncolor();
+	void returnpoint();
+	RGBA getstartcolour();
+	RGBA getcolour();
+	void setdeg(float deg);
+	void setstartdeg(float degree);
+	float getstartdeg();
+	void returndeg();
+	RGBA getcurrentcolour();
+	void setcurrentcolour(RGBA Colour);
+	Point getstartpoint();
+	void setstartpoint(Point xy);
+	void setstartscale(Point x2y2);
+	Point getstartscale();
+	void returnscale();
 };
 
 class Circle : public S
 {
+
 private:
-	RGBA Col;
 
 public:
 	Circle();
@@ -45,25 +72,18 @@ public:
 	Circle(Point p, float r);
 
 	~Circle();
-
-	void invert();
 	
 	void movebyvalue(Point xy) override;
 	void move(Point xy) override;
-	void rottocertain(float deg) override;
-	void rot(float deg) override;
 	void deformx(float times) override;
 	void deformy(float times) override;
 	void doubledeform(float times) override;
 	void Draw(RenderWindow& window) override;
-	void setcolour(RGBA Colour) override;
-	void returncolor();
 };
 
 class Triangle : public S
 {
 private:
-	RGBA Col;
 	
 public:
 	Triangle();
@@ -72,24 +92,17 @@ public:
 
 	~Triangle();
 
-	void invert();
-
 	void move(Point xy) override;
 	void movebyvalue(Point xy) override;
-	void rottocertain(float deg) override;
-	void rot(float deg) override;
 	void deformx(float times) override;
 	void deformy(float times) override;
 	void doubledeform(float times) override;
 	void Draw(RenderWindow& window) override;
-	void setcolour(RGBA Colour) override;
-	void returncolor();
 };
 
 class Square : public S
 {
 private:
-	RGBA Col;
 	
 public:
 	Square();
@@ -98,22 +111,16 @@ public:
 
 	~Square();
 
-	void invert();
-
 	void move(Point xy) override;
 	void movebyvalue(Point xy) override;
-	void rottocertain(float deg) override;
-	void rot(float deg) override;
 	void deformx(float times) override;
 	void deformy(float times) override;
 	void doubledeform(float times) override;
 	void Draw(RenderWindow& window) override;
-	void setcolour(RGBA Colour) override;
-	void returncolor();
 };
 
 struct Functions { // давай попробуем лучше так, окей?
 	Functions() = delete;
 	~Functions() = delete;
-	static void out(S* shape); // почему именно триангл, а не S*? апкаст, видимо, для слабаков
+	static void out(S* shape); 
 };

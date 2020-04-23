@@ -19,13 +19,6 @@ __interface iMove
 	void movebyvalue(Point xy);
 };
 
-__interface iRotate
-{
-	void rot(float deg);
-	void rottocertain(float deg);
-	void invert();
-};
-
 __interface iColour
 {
 	void setcolour(RGBA Col);

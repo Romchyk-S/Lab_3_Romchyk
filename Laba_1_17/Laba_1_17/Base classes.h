@@ -41,6 +41,16 @@ public:
 	void setB(float blue_1);
 	void setA(float alpha_1);
 
+	bool operator== (const RGBA & other)
+	{
+		return !(this->R == other.R || this->G == other.G || this->B == other.B || this->A == other.A);
+	}
+
+	bool operator!= (const RGBA & other)
+	{
+		return !(this->R == other.R || this->G == other.G || this->B == other.B || this->A == other.A);
+	}
+
 	~RGBA();
 };
 
