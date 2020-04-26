@@ -37,12 +37,10 @@ void begin(S*fig)
 	fig->setdeformer(2.f);
 	fig->setdeformerx(2.f);
 	fig->setdeformery(2.f);
-
 }
 
 void keypressedfunc(S *fig, Event &windowEvent)
 {
-
 	fig->setrotatorpos(15.f);
 	fig->setrotatorneg(-15.f);
 
@@ -71,40 +69,37 @@ void keypressedfunc(S *fig, Event &windowEvent)
 		fig->changecolour_red();
 		fig->setcurrentcolour(fig->getcolour());
 	}
+
 	if (windowEvent.key.code == Keyboard::Num2)
 	{
 		fig->changecolour_yellow();
 		fig->setcurrentcolour(fig->getcolour());
 	}
+
 	if (windowEvent.key.code == Keyboard::Num3)
 	{
 		fig->changecolour_green();
 		fig->setcurrentcolour(fig->getcolour());
 	}
+
 	if (windowEvent.key.code == Keyboard::Num4)
 	{
 		fig->changecolour_blue();
 		fig->setcurrentcolour(fig->getcolour());
 	}
+
 	if (windowEvent.key.code == Keyboard::Num5)
 	{
 		fig->changecolour_gray();
 		fig->setcurrentcolour(fig->getcolour());
 	}
+
 	if (windowEvent.key.code == Keyboard::Num0)
 	{
 		fig->returncolor();
 	}
 
-	if (windowEvent.key.code == Keyboard::B)
-	{
-		fig->returncolor();
-		fig->returnpoint();
-		fig->returnscale();
-		fig->returndeg();
-
-		fig->setcurrentcolour(fig->getcolour());
-	}
+	
 
 	if (windowEvent.key.code == Keyboard::Backspace) {
 		fig->setshow(false);
@@ -140,6 +135,15 @@ void keypressedfunc(S *fig, Event &windowEvent)
 		window.clear();
 	}
 	
+	if (windowEvent.key.code == Keyboard::B)
+	{
+		fig->returncolor();
+		fig->returnpoint();
+		fig->returnscale();
+		fig->returndeg();
+
+		fig->setcurrentcolour(fig->getcolour());
+	}
 }
 
 void drawing(S*fig, Event &windowEvent)
@@ -268,6 +272,6 @@ int main()
 		}
 	}
 				
-	//system("pause > NUL");
+	system("pause > NUL");
 	return 0;
 }
