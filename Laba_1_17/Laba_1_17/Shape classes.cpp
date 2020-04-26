@@ -183,8 +183,55 @@
 		Current_colour = Colour;
 	};
 
+	void S::setrotatorpos(float rot)
+	{
+		rotatorpos = rot;
+	}
 
+	float S::getrotatorpos()
+	{
+		return rotatorpos;
+	}
 
+	void S::setrotatorneg(float rot)
+	{
+		rotatorneg = rot;
+	}
+
+	float S::getrotatorneg()
+	{
+		return rotatorneg;
+	}
+
+	float S::getdeformerx() 
+	{
+		return deformerx;
+	}
+
+	void S::setdeformerx(float defx)
+	{
+		deformerx = defx;
+	}
+
+	float S::getdeformery()
+	{
+		return deformery;
+	}
+
+	void S::setdeformery(float defy)
+	{
+		deformery = defy;
+	}
+
+	float S::getdeformer()
+	{
+		return ddeformer;
+	}
+
+	void S::setdeformer(float def)
+	{
+		ddeformer = def;
+	}
 
 	Circle::Circle() = default;
 

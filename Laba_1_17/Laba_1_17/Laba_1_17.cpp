@@ -22,17 +22,30 @@ using namespace std;
 const auto center = 100.f;
 const auto radius = 50.f;
 auto mov = 20.f;
-auto deformerx = 2.f;
-auto deformery = 2.f;
-auto ddeformer = 2.f;
-auto rotatorpos = 15.f;
-auto rotatorneg = -15.f;
 auto path = false;
 
 RenderWindow window(VideoMode(1920, 1080), L"Моє вікно");
 
+void begin(S*fig)
+{
+	fig->setstartcolour(fig->getcolour());
+	fig->setstartpoint(fig->getxy());
+	fig->setstartscale(fig->getscale());
+	fig->setstartdeg(fig->getdeg());
+	fig->setcurrentcolour(fig->getcolour());
+	fig->setpath(false);
+	fig->setdeformer(2.f);
+	fig->setdeformerx(2.f);
+	fig->setdeformery(2.f);
+
+}
+
 void keypressedfunc(S *fig, Event &windowEvent)
 {
+
+	fig->setrotatorpos(15.f);
+	fig->setrotatorneg(-15.f);
+
 	if (fig->getshow() && windowEvent.key.code == Keyboard::W) {
 		fig->move(Point(0.f, -mov));
 	}
@@ -49,9 +62,9 @@ void keypressedfunc(S *fig, Event &windowEvent)
 		fig->move(Point(mov, 0.f));
 	}
 
-	/*if (windowEvent.key.code == Keyboard::P) {
-		fig->path = true;
-	}*/
+	if (windowEvent.key.code == Keyboard::P) {
+		fig->setpath(!(fig->getpath()));
+	}
 
 	if (windowEvent.key.code == Keyboard::Num1)
 	{
@@ -98,31 +111,35 @@ void keypressedfunc(S *fig, Event &windowEvent)
 	}
 
 	if (windowEvent.key.code == Keyboard::X) {
-		fig->deformx(deformerx);
-		deformerx++;
+		fig->deformx(fig->getdeformerx());
+		fig->setdeformerx(fig->getdeformerx() + 1.f);
 	}
 
 	if (windowEvent.key.code == Keyboard::Y) {
-		fig->deformy(deformery);
-		deformery++;
+		fig->deformy(fig->getdeformery());
+		fig->setdeformery(fig->getdeformery() + 1.f);
 	}
 
 	if (windowEvent.key.code == Keyboard::Z) {
-		fig->doubledeform(ddeformer);
-		ddeformer++;
-		deformerx++;
-		deformery++;
+		fig->doubledeform(fig->getdeformer());
+		fig->setdeformer(fig->getdeformer() + 1.f);
+		fig->setdeformerx(fig->getdeformerx() + 1.f);
+		fig->setdeformery(fig->getdeformery() + 1.f);
+	}
+	
+	if (windowEvent.key.code == Keyboard::Left) {
+		fig->setdeg(fig->getdeg() + fig->getrotatorpos());
 	}
 
 	if (windowEvent.key.code == Keyboard::Right) {
-		fig->setdeg(rotatorpos);
-		rotatorpos += 15;
+		fig->setdeg(fig->getdeg() + fig->getrotatorneg());
 	}
 
-	if (windowEvent.key.code == Keyboard::Left) {
-		fig->setdeg(rotatorneg);
-		rotatorneg -= 15;
+	if (fig->path == false)
+	{
+		window.clear();
 	}
+	
 }
 
 void drawing(S*fig, Event &windowEvent)
@@ -154,27 +171,11 @@ int main()
 	Triangle t(Point(center, center), radius);
 	Square s(Point(center, center), radius);
 
-	c.setstartcolour(c.getcolour());
-	t.setstartcolour(c.getcolour());
-	s.setstartcolour(c.getcolour());
+	begin(&c);
+	begin(&t);
+	begin(&s);
 
-	c.setstartpoint(c.getxy());
-	t.setstartpoint(c.getxy());
-	s.setstartpoint(c.getxy());
 
-	c.setstartscale(c.getscale());
-	t.setstartscale(t.getscale());
-	s.setstartscale(s.getscale());
-
-	c.setstartdeg(c.getdeg());
-	t.setstartdeg(t.getdeg());
-	s.setstartdeg(s.getdeg());
-
-	c.setcurrentcolour(c.getcolour());
-	t.setcurrentcolour(c.getcolour());
-	s.setcurrentcolour(c.getcolour());
-
-	
 	// где вектор фигур?
 
 
@@ -208,11 +209,6 @@ int main()
 					if (windowEvent.key.code == Keyboard::C) {
 						c.setshow(true);
 
-						//if (c.getcolour() != RGBA(0.f, 0.f, 0.f, 200.f))
-						//{
-							
-						//}
-
 						c.setcolour(c.getcurrentcolour());
 						
 
@@ -238,10 +234,6 @@ int main()
 				// при нажатии клавиш, нужно, чтобы нужная фигура добавлялась в вектор фигур
 				// а не просто появлялась в единственном экземпляре
 
-				if (windowEvent.key.code == Keyboard::P) {
-					path = !path;
-				}
-
 				if (Keyboard::isKeyPressed(Keyboard::C)) {
 
 					keypressedfunc(&c, windowEvent);
@@ -259,14 +251,6 @@ int main()
 					keypressedfunc(&s, windowEvent);
 
 				}					
-				
-
-
-
-				if (path == false)
-				{
-					window.clear();
-				}
 
 
 				drawing(&c, windowEvent);

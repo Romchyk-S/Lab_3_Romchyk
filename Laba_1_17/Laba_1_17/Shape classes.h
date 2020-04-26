@@ -25,6 +25,12 @@ public:
 	Point startpoint;
 	Point startscale;
 	float startdegree;
+	float rotatorpos;
+	float rotatorneg;
+	float deformerx;
+	float deformery;
+	float ddeformer;
+
 
 	Point getxy();
 	void setxy(Point x1y1);
@@ -59,6 +65,16 @@ public:
 	void setstartscale(Point x2y2);
 	Point getstartscale();
 	void returnscale();
+	void setrotatorpos(float rot);
+	float getrotatorpos();
+	void setrotatorneg(float rot);
+	float getrotatorneg();
+	float getdeformerx();
+	void setdeformerx(float defx);
+	float getdeformery();
+	void setdeformery(float defy);
+	float getdeformer();
+	void setdeformer(float def);
 };
 
 class Circle : public S
