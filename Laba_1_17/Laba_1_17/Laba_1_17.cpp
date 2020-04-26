@@ -37,6 +37,7 @@ void begin(S*fig)
 	fig->setdeformer(2.f);
 	fig->setdeformerx(2.f);
 	fig->setdeformery(2.f);
+
 }
 
 void keypressedfunc(S *fig, Event &windowEvent)
