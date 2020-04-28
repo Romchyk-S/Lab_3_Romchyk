@@ -37,6 +37,7 @@ void begin(S*fig)
 	fig->setdeformer(2.f);
 	fig->setdeformerx(2.f);
 	fig->setdeformery(2.f);
+	fig->sethidepath(false);
 }
 
 void keypressedfunc(S *fig, Event &windowEvent)
@@ -103,6 +104,8 @@ void keypressedfunc(S *fig, Event &windowEvent)
 
 	if (windowEvent.key.code == Keyboard::Backspace) {
 		fig->setshow(false);
+		fig->sethidepath(fig->getpath());
+		fig->setpath(false);
 	}
 
 	if (windowEvent.key.code == Keyboard::X) {
@@ -141,6 +144,7 @@ void keypressedfunc(S *fig, Event &windowEvent)
 		fig->returnpoint();
 		fig->returnscale();
 		fig->returndeg();
+		fig->setpath(false);
 
 		fig->setcurrentcolour(fig->getcolour());
 	}
@@ -214,7 +218,8 @@ int main()
 						c.setshow(true);
 
 						c.setcolour(c.getcurrentcolour());
-						
+
+						c.setpath(c.gethidepath());
 
 					}
 					if (windowEvent.key.code == Keyboard::T) {
@@ -222,12 +227,16 @@ int main()
 
 
 						t.setcolour(t.getcurrentcolour());
+
+						t.setpath(c.gethidepath());
 	
 					}
 					if (windowEvent.key.code == Keyboard::R) {
 						s.setshow(true);
 					
 						s.setcolour(s.getcurrentcolour());
+
+						s.setpath(c.gethidepath());
 						
 					}
 
@@ -272,6 +281,6 @@ int main()
 		}
 	}
 				
-	system("pause > NUL");
+	//system("pause > NUL");
 	return 0;
 }

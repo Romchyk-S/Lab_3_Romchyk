@@ -142,6 +142,16 @@
 		path = path_1;
 	}
 
+	bool S::gethidepath()
+	{
+		return hidepath;
+	}
+
+	void S::sethidepath(bool path_1) 
+	{
+		hidepath = path_1;
+	}
+
 	void S::setcolour(RGBA Colour)
 	{
 		Col.setR(Colour.getR());

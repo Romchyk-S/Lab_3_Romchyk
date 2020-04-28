@@ -18,6 +18,7 @@ public:
 	float degree{};
 	Point scale;
 	bool path;
+	bool hidepath;
 	RGBA Col;
 	RGBA Startcol;
 	RGBA Current_colour;
@@ -48,6 +49,8 @@ public:
 	void hide();
 	bool getpath();
 	void setpath(bool path_1);
+	bool gethidepath();
+	void sethidepath(bool path_1);
 	void setcolour(RGBA Colour) override;
 	void setstartcolour(RGBA Colour);
 	void returncolor();
