@@ -2,6 +2,8 @@
 #include <iostream>
 #include <Windows.h>
 
+#include<vector>
+
 #include "Base classes.h"
 #include "Interfaces.h"
 #include "Shape classes.h"
@@ -23,6 +25,9 @@ const auto center = 100.f;
 const auto radius = 50.f;
 auto mov = 20.f;
 auto path = false;
+
+vector<S> Active_Shapes;
+auto v = 0;
 
 RenderWindow window(VideoMode(1920, 1080), L"ћоЇ в≥кно");
 
@@ -166,28 +171,22 @@ void Functions::out(S* shape) {
 	cout << "ƒеформац≥€ y: " << shape->getscale().getY() << endl;
 };
 
+void createfuncs(S* shape)
+{
+	begin(shape);
 
+	shape->setshow(true);
+
+	shape->setcolour(shape->getcurrentcolour());
+
+	shape->setpath(shape->gethidepath());
+}
 
 
 int main()
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
-	
-
-	Circle c(Point(center, center), radius);
-	Triangle t(Point(center, center), radius);
-	Square s(Point(center, center), radius);
-
-	begin(&c);
-	begin(&t);
-	begin(&s);
-
-
-	// где вектор фигур?
-
-
-	Functions::out(&t);
 
 	while (window.isOpen())
 	{
@@ -212,68 +211,49 @@ int main()
 					}
 				}
 
-				if (Keyboard::isKeyPressed(Keyboard::Q)) {
+				
 						
 					if (windowEvent.key.code == Keyboard::C) {
-						c.setshow(true);
 
-						c.setcolour(c.getcurrentcolour());
+						auto c = new Circle();
 
-						c.setpath(c.gethidepath());
+						Active_Shapes.push_back(*c);
+
+						v++;
+
+						createfuncs(&Active_Shapes[v-1]);
 
 					}
 					if (windowEvent.key.code == Keyboard::T) {
-						t.setshow(true);
+						auto t = new Triangle();
 
+						Active_Shapes.push_back(*t);
 
-						t.setcolour(t.getcurrentcolour());
+						v++;
 
-						t.setpath(c.gethidepath());
+						createfuncs(&Active_Shapes[v - 1]);
 	
 					}
 					if (windowEvent.key.code == Keyboard::R) {
-						s.setshow(true);
-					
-						s.setcolour(s.getcurrentcolour());
+						auto s = new Square();
 
-						s.setpath(c.gethidepath());
+						Active_Shapes.push_back(*s);
+
+						v++;
+
+						createfuncs(&Active_Shapes[v - 1]);
 						
 					}
 
-				}
-			
 				
-				// за такой простой путь можно получить по *балу от будущих задач
-				// при нажатии клавиш, нужно, чтобы нужна€ фигура добавл€лась в вектор фигур
-				// а не просто по€вл€лась в единственном экземпл€ре
 
-				if (Keyboard::isKeyPressed(Keyboard::C)) {
 
-					keypressedfunc(&c, windowEvent);
+				keypressedfunc(&Active_Shapes[v-1], windowEvent);
 
+				for (int m = 0; m < v; m++)
+				{
+					drawing(&Active_Shapes[v-m], windowEvent);
 				}
-
-				if (Keyboard::isKeyPressed(Keyboard::T)) { 
-
-					keypressedfunc(&t, windowEvent);
-
-				}
-
-				if (Keyboard::isKeyPressed(Keyboard::R)) { 
-
-					keypressedfunc(&s, windowEvent);
-
-				}					
-
-
-				drawing(&c, windowEvent);
-				drawing(&t, windowEvent);
-				drawing(&s, windowEvent);
-
-
-				// должен быть вектор всех фигур, по которому ты проходишьс€
-				// и выполн€ешь определЄные операции, использу€ полиморфизм
-				// но как вижу, жизнь теб€ с полиморфизмом не подружила XD
 			}
 
 			window.display();
