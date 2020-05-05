@@ -5,7 +5,6 @@
 #include "Base classes.h"
 #include "Interfaces.h"
 #include "Shape classes.h"
-#include <vector>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
@@ -24,9 +23,6 @@ const auto center = 100.f;
 const auto radius = 50.f;
 auto mov = 20.f;
 auto path = false;
-
-vector<S> Active_Shapes;
-auto v = 0;
 
 RenderWindow window(VideoMode(1920, 1080), L"ћоЇ в≥кно");
 
@@ -106,7 +102,7 @@ void keypressedfunc(S *fig, Event &windowEvent)
 
 	
 
-	if (windowEvent.key.code == Keyboard::H) {
+	if (windowEvent.key.code == Keyboard::Backspace) {
 		fig->setshow(false);
 		fig->sethidepath(fig->getpath());
 		fig->setpath(false);
@@ -170,15 +166,7 @@ void Functions::out(S* shape) {
 	cout << "ƒеформац≥€ y: " << shape->getscale().getY() << endl;
 };
 
-void createshapes(S* shape)
-{
-	shape->setshow(true);
 
-	shape->setcolour(shape->getcurrentcolour());
-
-	shape->setpath(shape->gethidepath());
-
-}
 
 
 int main()
@@ -194,6 +182,12 @@ int main()
 	begin(&c);
 	begin(&t);
 	begin(&s);
+
+
+	// где вектор фигур?
+
+
+	Functions::out(&t);
 
 	while (window.isOpen())
 	{
@@ -221,40 +215,65 @@ int main()
 				if (Keyboard::isKeyPressed(Keyboard::Q)) {
 						
 					if (windowEvent.key.code == Keyboard::C) {
-						Active_Shapes.push_back(c);
+						c.setshow(true);
 
-						v++;
+						c.setcolour(c.getcurrentcolour());
 
-						createshapes(&Active_Shapes[v-1]);
+						c.setpath(c.gethidepath());
 
 					}
 					if (windowEvent.key.code == Keyboard::T) {
-						Active_Shapes.push_back(t);
+						t.setshow(true);
 
-						v++;
 
-						createshapes(&Active_Shapes[v-1]);
+						t.setcolour(t.getcurrentcolour());
+
+						t.setpath(c.gethidepath());
 	
 					}
 					if (windowEvent.key.code == Keyboard::R) {
-						Active_Shapes.push_back(s);
+						s.setshow(true);
+					
+						s.setcolour(s.getcurrentcolour());
 
-						v++;
-
-						createshapes(&Active_Shapes[v-1]);
-									
+						s.setpath(c.gethidepath());
+						
 					}
 
 				}
+			
+				
+				// за такой простой путь можно получить по *балу от будущих задач
+				// при нажатии клавиш, нужно, чтобы нужна€ фигура добавл€лась в вектор фигур
+				// а не просто по€вл€лась в единственном экземпл€ре
 
-				keypressedfunc(&Active_Shapes[v-1], windowEvent);
+				if (Keyboard::isKeyPressed(Keyboard::C)) {
 
-				if (windowEvent.key.code == Keyboard::BackSpace) {
-					Active_Shapes.pop_back();
+					keypressedfunc(&c, windowEvent);
+
 				}
 
+				if (Keyboard::isKeyPressed(Keyboard::T)) { 
 
-				drawing(&Active_Shapes[v-1], windowEvent);
+					keypressedfunc(&t, windowEvent);
+
+				}
+
+				if (Keyboard::isKeyPressed(Keyboard::R)) { 
+
+					keypressedfunc(&s, windowEvent);
+
+				}					
+
+
+				drawing(&c, windowEvent);
+				drawing(&t, windowEvent);
+				drawing(&s, windowEvent);
+
+
+				// должен быть вектор всех фигур, по которому ты проходишьс€
+				// и выполн€ешь определЄные операции, использу€ полиморфизм
+				// но как вижу, жизнь теб€ с полиморфизмом не подружила XD
 			}
 
 			window.display();

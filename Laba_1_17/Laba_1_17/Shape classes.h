@@ -2,7 +2,6 @@
 
 #include "Interfaces.h"
 #include "Base classes.h"
-#include <vector>
 
 using namespace sf;
 using namespace std;
