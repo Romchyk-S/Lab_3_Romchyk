@@ -26,7 +26,7 @@ const auto radius = 50.f;
 auto mov = 20.f;
 auto path = false;
 
-vector<S> Active_Shapes;
+vector<&S> Active_Shapes;
 auto v = 0;
 
 RenderWindow window(VideoMode(1920, 1080), L"Моє вікно");
@@ -217,7 +217,7 @@ int main()
 
 						auto c = new Circle();
 
-						Active_Shapes.push_back(*c);
+						Active_Shapes.push_back(c);
 
 						v++;
 
@@ -227,7 +227,7 @@ int main()
 					if (windowEvent.key.code == Keyboard::T) {
 						auto t = new Triangle();
 
-						Active_Shapes.push_back(*t);
+						Active_Shapes.push_back(t);
 
 						v++;
 
@@ -237,7 +237,7 @@ int main()
 					if (windowEvent.key.code == Keyboard::R) {
 						auto s = new Square();
 
-						Active_Shapes.push_back(*s);
+						Active_Shapes.push_back(s);
 
 						v++;
 
