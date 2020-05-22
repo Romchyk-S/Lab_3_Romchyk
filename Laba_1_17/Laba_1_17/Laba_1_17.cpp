@@ -26,8 +26,12 @@ const auto radius = 50.f;
 auto mov = 20.f;
 auto path = false;
 
-vector<&S> Active_Shapes;
-auto v = 0;
+
+float s1[2] = { 0,0 };
+float e[2] = { 1920,1080 };
+
+Point start;
+Point en;
 
 RenderWindow window(VideoMode(1920, 1080), L"Моє вікно");
 
@@ -50,21 +54,19 @@ void keypressedfunc(S *fig, Event &windowEvent)
 	fig->setrotatorpos(15.f);
 	fig->setrotatorneg(-15.f);
 
-	if (fig->getshow() && windowEvent.key.code == Keyboard::W) {
-		fig->move(Point(0.f, -mov));
+
+	 if (fig->getshow() == true) {
+
+	if (en < fig->getxy())
+	{
+		fig->move(Point(mov, mov));
+	}
+	else if (en >= fig->getxy() && start <= fig->getxy())
+	{
+		fig->move(Point(-mov, -mov));
+	}
 	}
 
-	if (fig->getshow() && windowEvent.key.code == Keyboard::A) {
-		fig->move(Point(-mov, 0.f));
-	}
-
-	if (fig->getshow() == true && windowEvent.key.code == Keyboard::S) {
-		fig->move(Point(0.f, mov));
-	}
-
-	if (fig->getshow() == true && windowEvent.key.code == Keyboard::D) {
-		fig->move(Point(mov, 0.f));
-	}
 
 	if (windowEvent.key.code == Keyboard::P) {
 		fig->setpath(!(fig->getpath()));
@@ -163,14 +165,6 @@ void drawing(S*fig, Event &windowEvent)
 	}
 }
 
-void Functions::out(S* shape) {
-	cout << "Центр: (" << shape->getxy().getX() << ";" << shape->getxy().getY() << ")" << endl;
-	cout << "Радіус: " << shape->getrad() << endl;
-	cout << "Градуси: " << shape->getdeg() << endl;
-	cout << "Деформація x: " << shape->getscale().getX() << endl;
-	cout << "Деформація y: " << shape->getscale().getY() << endl;
-};
-
 void createfuncs(S* shape)
 {
 	begin(shape);
@@ -182,11 +176,32 @@ void createfuncs(S* shape)
 	shape->setpath(shape->gethidepath());
 }
 
+void Functions::out(S* shape) {
+	cout << "Центр: (" << shape->getxy().getX() << ";" << shape->getxy().getY() << ")" << endl;
+	cout << "Радіус: " << shape->getrad() << endl;
+	cout << "Градуси: " << shape->getdeg() << endl;
+	cout << "Деформація x: " << shape->getscale().getX() << endl;
+	cout << "Деформація y: " << shape->getscale().getY() << endl;
+};
+
 
 int main()
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
+
+	Circle c(Point(center, center), radius);
+	Triangle t(Point(center, center), radius);
+	Square s(Point(center, center), radius);
+
+	begin(&c);
+	begin(&t);
+	begin(&s);
+
+	Functions::out(&c);
+
+	start = s1;
+	en = e;
 
 	while (window.isOpen())
 	{
@@ -212,48 +227,60 @@ int main()
 				}
 
 				
-						
+
+				if (Keyboard::isKeyPressed(Keyboard::Q)) {
+
 					if (windowEvent.key.code == Keyboard::C) {
+						c.setshow(true);
 
-						auto c = new Circle();
+						c.setcolour(c.getcurrentcolour());
 
-						Active_Shapes.push_back(c);
-
-						v++;
-
-						createfuncs(&Active_Shapes[v-1]);
+						c.setpath(c.gethidepath());
 
 					}
 					if (windowEvent.key.code == Keyboard::T) {
-						auto t = new Triangle();
+						t.setshow(true);
 
-						Active_Shapes.push_back(t);
 
-						v++;
+						t.setcolour(t.getcurrentcolour());
 
-						createfuncs(&Active_Shapes[v - 1]);
-	
+						t.setpath(t.gethidepath());
+
 					}
 					if (windowEvent.key.code == Keyboard::R) {
-						auto s = new Square();
+						s.setshow(true);
 
-						Active_Shapes.push_back(s);
+						s.setcolour(s.getcurrentcolour());
 
-						v++;
+						s.setpath(s.gethidepath());
 
-						createfuncs(&Active_Shapes[v - 1]);
-						
 					}
 
-				
-
-
-				keypressedfunc(&Active_Shapes[v-1], windowEvent);
-
-				for (int m = 0; m < v; m++)
-				{
-					drawing(&Active_Shapes[v-m], windowEvent);
 				}
+
+				if (Keyboard::isKeyPressed(Keyboard::C)) {
+
+					keypressedfunc(&c, windowEvent);
+
+				}
+
+				if (Keyboard::isKeyPressed(Keyboard::T)) {
+
+					keypressedfunc(&t, windowEvent);
+
+				}
+
+				if (Keyboard::isKeyPressed(Keyboard::R)) {
+
+					keypressedfunc(&s, windowEvent);
+
+				}
+
+
+				drawing(&c, windowEvent);
+				drawing(&t, windowEvent);
+				drawing(&s, windowEvent);
+
 			}
 
 			window.display();
@@ -261,6 +288,6 @@ int main()
 		}
 	}
 				
-	//system("pause > NUL");
+	system("pause > NUL");
 	return 0;
 }

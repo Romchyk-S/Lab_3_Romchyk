@@ -33,6 +33,48 @@ void Point::setY(float value)
 	y = value;
 }
 
+void Point::operator=(float a[])
+{
+	x = a[0];
+	y = a[1];
+}
+
+bool Point::operator<(Point p)
+{
+	if (x < p.getX() && y < p.getY())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Point::operator<=(Point p)
+{
+	if (x <= p.getX() && y <= p.getY())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Point::operator>=(Point p)
+{
+	if (x >= p.getX() && y >= p.getY())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 void RGBA::SetCol(float& Color, float Num_Col)
 {
 	if (Num_Col > 255.f || Num_Col < 0.f)

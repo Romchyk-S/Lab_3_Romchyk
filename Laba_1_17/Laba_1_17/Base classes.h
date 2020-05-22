@@ -16,6 +16,11 @@ public:
 	float getY();
 	void setX(float value);
 	void setY(float value);
+
+	void operator=(float a[]);
+	bool operator<(Point p);
+	bool operator<=(Point p);
+	bool operator>=(Point p);
 };
 
 class RGBA

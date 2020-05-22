@@ -138,8 +138,8 @@ public:
 	void Draw(RenderWindow& window) override;
 };
 
-struct Functions { // давай попробуем лучше так, окей?
+struct Functions {
 	Functions() = delete;
 	~Functions() = delete;
-	static void out(S* shape); 
+	static void out(S* shape);
 };
