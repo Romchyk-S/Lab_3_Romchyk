@@ -8,11 +8,11 @@ using namespace std;
 
 class S : public iMove, public iColour, public iScaling, public iDraw
 {
-public:
-	S();
-	virtual ~S(); 
+private:
+	void begin();
 
-	
+public:
+
 	Point xy;
 	float radius{};
 	float degree{};
@@ -31,7 +31,11 @@ public:
 	float deformerx;
 	float deformery;
 	float ddeformer;
+	int mov;
 
+	S();
+	S(Point p, float r, RGBA Colour_);
+	virtual ~S();
 
 	Point getxy();
 	void setxy(Point x1y1);
@@ -78,6 +82,8 @@ public:
 	void setdeformery(float defy);
 	float getdeformer();
 	void setdeformer(float def);
+	void setmov(int k);
+	int getmov();
 };
 
 class Circle : public S
@@ -88,7 +94,7 @@ private:
 public:
 	Circle();
 
-	Circle(Point p, float r);
+	Circle(Point p, float r, RGBA Colour_);
 
 	~Circle();
 	
@@ -107,7 +113,7 @@ private:
 public:
 	Triangle();
 
-	Triangle(Point p, float r);
+	Triangle(Point p, float r, RGBA Colour_);
 
 	~Triangle();
 
@@ -126,7 +132,7 @@ private:
 public:
 	Square();
 
-	Square(Point p, float r);
+	Square(Point p, float r, RGBA Colour_);
 
 	~Square();
 

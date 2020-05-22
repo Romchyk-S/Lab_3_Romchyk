@@ -23,31 +23,15 @@ using namespace std;
 
 const auto center = 100.f;
 const auto radius = 50.f;
-auto mov = 20.f;
-auto path = false;
 
+RenderWindow window(VideoMode(1920, 1080), L"Моє вікно");
 
 float s1[2] = { 0,0 };
-float e[2] = { 1920,1080 };
+float e[2] = { 1900,1060 };
 
 Point start;
 Point en;
 
-RenderWindow window(VideoMode(1920, 1080), L"Моє вікно");
-
-void begin(S*fig)
-{
-	fig->setstartcolour(fig->getcolour());
-	fig->setstartpoint(fig->getxy());
-	fig->setstartscale(fig->getscale());
-	fig->setstartdeg(fig->getdeg());
-	fig->setcurrentcolour(fig->getcolour());
-	fig->setpath(false);
-	fig->setdeformer(2.f);
-	fig->setdeformerx(2.f);
-	fig->setdeformery(2.f);
-	fig->sethidepath(false);
-}
 
 void keypressedfunc(S *fig, Event &windowEvent)
 {
@@ -55,18 +39,30 @@ void keypressedfunc(S *fig, Event &windowEvent)
 	fig->setrotatorneg(-15.f);
 
 
-	 if (fig->getshow() == true) {
+	if (fig->getshow() == true) {
 
-	if (en < fig->getxy())
-	{
-		fig->move(Point(mov, mov));
-	}
-	else if (en >= fig->getxy() && start <= fig->getxy())
-	{
-		fig->move(Point(-mov, -mov));
-	}
+		if (en > fig->getxy())
+		{
+			fig->move(Point(fig->getmov(), fig->getmov()));
+		}
+		else if (en >= fig->getxy() && start <= fig->getxy())
+		{
+			fig->move(Point(-fig->getmov(), -fig->getmov()));
+		}
 	}
 
+	if (windowEvent.key.code == Keyboard::Equal) {
+		if (fig->getmov() < 100)
+		{
+			fig->setmov(fig->getmov() + 5);
+		}
+	}
+	if (windowEvent.key.code == Keyboard::Hyphen) {
+		if (fig->getmov() > 5)
+		{
+			fig->setmov(fig->getmov() - 5);
+		}
+	}
 
 	if (windowEvent.key.code == Keyboard::P) {
 		fig->setpath(!(fig->getpath()));
@@ -157,7 +153,7 @@ void keypressedfunc(S *fig, Event &windowEvent)
 	}
 }
 
-void drawing(S*fig, Event &windowEvent)
+void drawing(S*fig)
 {
 	if (fig->getshow() == true)
 	{
@@ -165,16 +161,13 @@ void drawing(S*fig, Event &windowEvent)
 	}
 }
 
-void createfuncs(S* shape)
+enum shapes
 {
-	begin(shape);
-
-	shape->setshow(true);
-
-	shape->setcolour(shape->getcurrentcolour());
-
-	shape->setpath(shape->gethidepath());
-}
+	CIRCLE,
+	TRIANGLE, 
+	SQUARE,
+	AGGR
+};
 
 void Functions::out(S* shape) {
 	cout << "Центр: (" << shape->getxy().getX() << ";" << shape->getxy().getY() << ")" << endl;
@@ -190,15 +183,16 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	Circle c(Point(center, center), radius);
-	Triangle t(Point(center, center), radius);
-	Square s(Point(center, center), radius);
+	
 
-	begin(&c);
-	begin(&t);
-	begin(&s);
-
-	Functions::out(&c);
+	vector<S*> ActiveShapes
+	{
+		new Circle(Point(center, center), radius, RGBA(205,100,200, 200)),
+		new Triangle(Point(center, center), radius, RGBA(128,128,0,200)),
+		new Square(Point(center, center), radius, RGBA(255,0,255,200)),
+	};
+	
+	Functions::out(ActiveShapes[CIRCLE]);
 
 	start = s1;
 	en = e;
@@ -213,46 +207,33 @@ int main()
 
 			if (windowEvent.type == Event::KeyReleased)
 			{
-				if (windowEvent.key.code == Keyboard::Equal) {
-					if (mov < 100)
-					{
-						mov += 5;
-					}
-				}
-				if (windowEvent.key.code == Keyboard::Hyphen) {
-					if (mov > 5)
-					{
-						mov -= 5;
-					}
-				}
-
 				
 
 				if (Keyboard::isKeyPressed(Keyboard::Q)) {
 
 					if (windowEvent.key.code == Keyboard::C) {
-						c.setshow(true);
 
-						c.setcolour(c.getcurrentcolour());
+						ActiveShapes[CIRCLE]->setshow(true);
 
-						c.setpath(c.gethidepath());
+						ActiveShapes[CIRCLE]->setcolour(ActiveShapes[CIRCLE]->getcurrentcolour());
+
+						ActiveShapes[CIRCLE]->setpath(ActiveShapes[CIRCLE]->gethidepath());
 
 					}
 					if (windowEvent.key.code == Keyboard::T) {
-						t.setshow(true);
+						ActiveShapes[TRIANGLE]->setshow(true);
 
+						ActiveShapes[TRIANGLE]->setcolour(ActiveShapes[TRIANGLE]->getcurrentcolour());
 
-						t.setcolour(t.getcurrentcolour());
-
-						t.setpath(t.gethidepath());
+						ActiveShapes[TRIANGLE]->setpath(ActiveShapes[TRIANGLE]->gethidepath());
 
 					}
 					if (windowEvent.key.code == Keyboard::R) {
-						s.setshow(true);
+						ActiveShapes[SQUARE]->setshow(true);
 
-						s.setcolour(s.getcurrentcolour());
+						ActiveShapes[SQUARE]->setcolour(ActiveShapes[SQUARE]->getcurrentcolour());
 
-						s.setpath(s.gethidepath());
+						ActiveShapes[SQUARE]->setpath(ActiveShapes[SQUARE]->gethidepath());
 
 					}
 
@@ -260,32 +241,38 @@ int main()
 
 				if (Keyboard::isKeyPressed(Keyboard::C)) {
 
-					keypressedfunc(&c, windowEvent);
+					keypressedfunc(ActiveShapes[CIRCLE], windowEvent);
 
 				}
 
 				if (Keyboard::isKeyPressed(Keyboard::T)) {
 
-					keypressedfunc(&t, windowEvent);
+					keypressedfunc(ActiveShapes[TRIANGLE], windowEvent);
 
 				}
 
 				if (Keyboard::isKeyPressed(Keyboard::R)) {
 
-					keypressedfunc(&s, windowEvent);
+					keypressedfunc(ActiveShapes[SQUARE], windowEvent);
 
 				}
 
 
-				drawing(&c, windowEvent);
-				drawing(&t, windowEvent);
-				drawing(&s, windowEvent);
+				for(auto& i : ActiveShapes)
+				{
+					drawing(i);
+				}
 
 			}
 
 			window.display();
 
 		}
+	}
+
+	for (auto& i : ActiveShapes)
+	{
+		delete(i);
 	}
 				
 	system("pause > NUL");

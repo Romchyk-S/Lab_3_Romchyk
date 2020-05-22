@@ -39,40 +39,34 @@ void Point::operator=(float a[])
 	y = a[1];
 }
 
-bool Point::operator<(Point p)
+bool Point::operator>(Point p) const
 {
-	if (x < p.getX() && y < p.getY())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return x > p.getX() && y > p.getY();
 }
 
-bool Point::operator<=(Point p)
+bool Point::operator<(Point p) const
 {
-	if (x <= p.getX() && y <= p.getY())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return x < p.getX() && y < p.getY();
 }
 
-bool Point::operator>=(Point p)
+bool Point::operator<=(Point p) const
 {
-	if (x >= p.getX() && y >= p.getY())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return !this->operator>(p);
+}
+
+bool Point::operator>=(Point p) const
+{
+	return !this->operator<(p);
+}
+
+bool Point::operator ==(Point p) const
+{ 
+	return x == p.getX() && y == p.getY();
+}
+
+bool Point::operator !=(Point p) const
+{
+	return x != p.getX() && y != p.getY();
 }
 
 void RGBA::SetCol(float& Color, float Num_Col)

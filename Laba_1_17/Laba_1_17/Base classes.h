@@ -18,9 +18,13 @@ public:
 	void setY(float value);
 
 	void operator=(float a[]);
-	bool operator<(Point p);
-	bool operator<=(Point p);
-	bool operator>=(Point p);
+	bool operator<(Point p) const;
+	bool operator>(Point p) const;
+	bool operator<=(Point p) const;
+	bool operator>=(Point p) const;
+	bool operator==(Point p) const;
+	bool operator!=(Point p) const;
+
 };
 
 class RGBA

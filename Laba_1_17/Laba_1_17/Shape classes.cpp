@@ -2,7 +2,20 @@
 #include "Shape classes.h"
 
 
-	S::S() = default;
+	S::S()
+	{
+		this->begin();
+	};
+
+	S::S(Point p, float r, RGBA Colour_)
+	{
+		xy = p;
+		radius = r;
+		degree = 0.f;
+		scale = { 1.f, 1.f };
+		this->begin();
+	}
+
 	S::~S() = default;
 
 
@@ -16,6 +29,15 @@
 		setcolour(RGBA(0.f, 0.f, 0.f, 200.f));
 	}
 
+	void S::setmov(int k)
+	{
+		mov = k;
+	}
+
+	int S::getmov()
+	{
+		return mov;
+	}
 
 	void S::setshow(bool show_1)
 	{
@@ -243,18 +265,25 @@
 		ddeformer = def;
 	}
 
+	void S::begin()
+	{
+		this->setstartcolour(this->getcolour());
+		this->setstartpoint(this->getxy());
+		this->setstartscale(this->getscale());
+		this->setstartdeg(this->getdeg());
+		this->setcurrentcolour(this->getcolour());
+		this->setpath(false);
+		this->setdeformer(2.f);
+		this->setdeformerx(2.f);
+		this->setdeformery(2.f);
+		this->sethidepath(false);
+	}
+
 	Circle::Circle() = default;
 
-	Circle::Circle(Point p, float r)
+	Circle::Circle(Point p, float r, RGBA Colour_) : S(p,r, Colour_)
 	{
-		xy = p;
-		radius = r;
-		degree = 0.f;
-		scale = { 1.f, 1.f };
-		Col.setR(205.f);
-		Col.setG(100.f);
-		Col.setB(200.f);
-		Col.setA(200.f);
+		
 	}
 
 	Circle::~Circle() = default;
@@ -311,16 +340,9 @@
 	Triangle::Triangle() = default;
 
 
-	Triangle::Triangle(Point p, float r)
+	Triangle::Triangle(Point p, float r, RGBA Colour_) : S(p, r, Colour_)
 	{
-		xy = p;
-		radius = r;
-		degree = 0.f;
-		scale = { 1.f, 1.f };
-		Col.setR(128.f);
-		Col.setG(128.f);
-		Col.setB(0.f);
-		Col.setA(200.f);
+	
 	}
 
 	Triangle::~Triangle() = default;
@@ -376,16 +398,9 @@
 	Square::Square() = default;
 
 
-	Square::Square(Point p, float r)
+	Square::Square(Point p, float r, RGBA Colour_) : S(p, r, Colour_)
 	{
-		xy = p;
-		radius = r;
-		degree = 0.f;
-		scale = { 1.f, 1.f };
-		Col.setR(255.f);
-		Col.setG(0.f);
-		Col.setB(255.f);
-		Col.setA(200.f);
+	
 	}
 
 	Square::~Square() = default;
