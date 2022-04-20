@@ -169,6 +169,155 @@ enum shapes
 	AGGR
 };
 
+class Agr : public S
+{
+private:
+	vector<S*> ActiveShapes;
+
+public:
+	Agr(initializer_list<S*> ActiveShapes)
+	{
+		for (const auto &i : ActiveShapes)
+		{
+			this->ActiveShapes.push_back(i);
+		}
+	}
+
+	void move(Point xy) override
+	{
+		for (auto& i : this->ActiveShapes)
+		{
+			i->move(xy);
+		}
+	}
+
+	void movebyvalue(Point xy) override
+	{
+		for (auto& i : this->ActiveShapes)
+		{
+			i->movebyvalue(xy);
+		}
+	}
+
+	void setcolour(RGBA Col) override
+	{
+		for (auto& i : this->ActiveShapes)
+		{
+			i->setcolour(Col);
+		}
+	}
+
+	void deformx(float times) override
+	{
+		for (auto& i : this->ActiveShapes)
+		{
+			i->deformx(times);
+		}
+	}
+
+	void deformy(float times) override
+	{
+		for (auto& i : this->ActiveShapes)
+		{
+			i->deformy(times);
+		}
+	}
+
+	void doubledeform(float times) override
+	{
+		for (auto& i : this->ActiveShapes)
+		{
+			i->doubledeform(times);
+		}
+	}
+
+
+	Point getxy()
+	{
+		for (auto& i : this->ActiveShapes)
+		{
+			i->getxy();
+		}
+	}
+
+
+	void setxy(Point x1y1)
+	{
+		for (auto& i : this->ActiveShapes)
+		{
+			i->setxy(x1y1);
+		}
+	}
+
+	float getrad()
+	{
+		for (auto& i : this->ActiveShapes)
+		{
+			i->getrad();
+		}
+	}
+
+	float getdeg()
+	{
+		for (auto& i : this->ActiveShapes)
+		{
+			i->getdeg();
+		}
+	}
+
+	Point getscale()
+	{
+		for (auto& i : this->ActiveShapes)
+		{
+			i->getscale();
+		}
+	}
+
+	void setscale(Point x2y2);
+	bool getshow();
+	void setshow(bool show_1);
+	void changecolour_red();
+	void changecolour_yellow();
+	void changecolour_green();
+	void changecolour_blue();
+	void changecolour_gray();
+	void hide();
+	bool getpath();
+	void setpath(bool path_1);
+	bool gethidepath();
+	void sethidepath(bool path_1);
+	void setcolour(RGBA Colour) override;
+	void setstartcolour(RGBA Colour);
+	void returncolor();
+	void returnpoint();
+	RGBA getstartcolour();
+	RGBA getcolour();
+	void setdeg(float deg);
+	void setstartdeg(float degree);
+	float getstartdeg();
+	void returndeg();
+	RGBA getcurrentcolour();
+	void setcurrentcolour(RGBA Colour);
+	Point getstartpoint();
+	void setstartpoint(Point xy);
+	void setstartscale(Point x2y2);
+	Point getstartscale();
+	void returnscale();
+	void setrotatorpos(float rot);
+	float getrotatorpos();
+	void setrotatorneg(float rot);
+	float getrotatorneg();
+	float getdeformerx();
+	void setdeformerx(float defx);
+	float getdeformery();
+	void setdeformery(float defy);
+	float getdeformer();
+	void setdeformer(float def);
+	void setmov(int k);
+	int getmov();
+
+};
+
 void Functions::out(S* shape) {
 	cout << "Центр: (" << shape->getxy().getX() << ";" << shape->getxy().getY() << ")" << endl;
 	cout << "Радіус: " << shape->getrad() << endl;
@@ -187,9 +336,10 @@ int main()
 
 	vector<S*> ActiveShapes
 	{
-		new Circle(Point(center, center), radius, RGBA(205,100,200, 200)),
-		new Triangle(Point(center, center), radius, RGBA(128,128,0,200)),
-		new Square(Point(center, center), radius, RGBA(255,0,255,200)),
+		new Circle(Point(center), radius, RGBA(205,100,200, 200)),
+		new Triangle(Point(center), radius, RGBA(128,128,0,200)),
+		new Square(Point(center), radius, RGBA(255,0,255,200)),
+		//new Agr(new Circle(Point(center), radius, RGBA(205,100,200,200)));
 	};
 	
 	Functions::out(ActiveShapes[CIRCLE]);

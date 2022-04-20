@@ -13,6 +13,7 @@
 		radius = r;
 		degree = 0.f;
 		scale = { 1.f, 1.f };
+		Col = Colour_;
 		this->begin();
 	}
 
